@@ -69,6 +69,7 @@ video {
 .home-content .logo-section div span {
     background-color: white;
     margin-right: 15px;
+    opacity: 60%;
 }
 
 .home-content .logo-section div span img {
