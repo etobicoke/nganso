@@ -1,18 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
 ---
 
 <Layout title="Welcome to Astro.">
 	<div class="home">
 	    <video autoplay muted loop>
-	        <source src="assets/videos/pexels-artem-podrez-8986490.mp4" type="video/mp4" />
+	        <source src="assets/videos/vid0.mp4" type="video/mp4" id="video" />
         </video>
         <div class="overlay"></div>
         <div class="home-content">
-          <h1>High-End Kitchen.</h1>
-          <div class="middle-line"></div>
-          <button>DISCOVER</button>
+          <h1>
+            <span>I'm Working On It.</span>
+          </h1>
+          <h4>gustave (at) nganso (dot) com</h4>
         </div>
 	</div>
 </Layout>
@@ -76,3 +76,23 @@ import Card from '../components/Card.astro';
 		padding: 0;
 	}
 </style>
+<script>
+  (function(){
+
+    // Retrieving Video Source
+    function getVidSource (vidSrc) {
+        return `assets/videos/${vidSrc}.mp4`;
+    }
+
+    let vidArr = ["vid0", "vid1", "vid2", "vid3", "vid4", "vid5", "vid6", "vid7", "vid8", "vid9"];
+    let videoPlayer = document.getElementsByTagName('video')[0];
+
+    // Retrieving video from vidArr randomly
+    let vid = vidArr[Math.floor(Math.random()*vidArr.length)];
+    let srcAttr = getVidSource(vid);
+
+    document.getElementById("video").setAttribute("src", srcAttr);
+    videoPlayer.load();
+
+  })();
+</script>
