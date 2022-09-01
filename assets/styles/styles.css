@@ -60,6 +60,36 @@ video {
     opacity: 50%;
 }
 
+.home-content .logo-section {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.home-content .logo-section div span {
+    background-color: white;
+    margin-right: 15px;
+}
+
+.home-content .logo-section div span img {
+    width: 40px;
+    height: 40px;
+}
+
+.home-content .github-logo,
+.home-content .linkedin-logo {
+    width: 44px;
+    height: 44px;
+    display: inline-block;
+}
+
+.home-content .github-logo img,
+.home-content .linkedin-logo img {
+    position: relative;
+    top: 2px;
+    left: 2px;
+}
+
 .middle-line {
     height: 200px;
     width: 2px;
