@@ -60,6 +60,13 @@ video {
     opacity: 50%;
 }
 
+.home-content h5 {
+    text-align: center;
+    font-size: 1.3rem;
+    opacity: 50%;
+    margin: 45px 0 30px;
+}
+
 .home-content .logo-section {
     display: flex;
     justify-content: center;
