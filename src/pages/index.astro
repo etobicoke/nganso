@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { Prism } from '@astrojs/prism';
 ---
 
 <Layout title="nganso.com - coming soon">
@@ -30,6 +31,9 @@ import Layout from '../layouts/Layout.astro';
           </section>
         </div>
 	</div>
+  <div>
+    <Prism lang="js" code={`const foo = 'bar';`} />
+  </div>
 </Layout>
 
 <style>
