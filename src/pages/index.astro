@@ -102,6 +102,10 @@ import { Prism } from '@astrojs/prism';
 
     // Rewriting vidArr
     let vidArr = Array.apply(null, Array(10)).map((x, i) => ("vid" + i));
+    // let vidArr = Array.apply(null, Array(10)).map(function (x, i){
+    //    console.log('...', x);
+    //    return "vid" + i;
+    // });
 
     // let vidArr = ["vid0", "vid1", "vid2", "vid3", "vid4", "vid5", "vid6", "vid7", "vid8", "vid9"];
     let videoPlayer = document.getElementsByTagName('video')[0];
