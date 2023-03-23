@@ -110,6 +110,8 @@ import { Prism } from '@astrojs/prism';
 
     // Randomly retrieving video from vidArr array
     let video = vidArr[Math.floor(Math.random()*vidArr.length)];
+
+    // Get video URL
     let srcAttr = getVidSource(video);
 
     document.getElementById("video").setAttribute("src", srcAttr);
