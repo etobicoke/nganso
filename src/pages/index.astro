@@ -109,8 +109,8 @@ import { Prism } from '@astrojs/prism';
     let videoPlayer = document.getElementsByTagName('video')[0];
 
     // Randomly retrieving video from vidArr array
-    let vid = vidArr[Math.floor(Math.random()*vidArr.length)];
-    let srcAttr = getVidSource(vid);
+    let video = vidArr[Math.floor(Math.random()*vidArr.length)];
+    let srcAttr = getVidSource(video);
 
     document.getElementById("video").setAttribute("src", srcAttr);
     videoPlayer.load();
