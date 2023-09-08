@@ -83,6 +83,7 @@ import { Prism } from '@astrojs/prism';
     // Get video URL
     let srcAttr = getVidSource(video);
 
+    // Setting video source attribute
     document.getElementById("video").setAttribute("src", srcAttr);
     videoPlayer.load();
   })();
