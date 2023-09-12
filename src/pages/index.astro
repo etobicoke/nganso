@@ -72,6 +72,9 @@ import { Prism } from '@astrojs/prism';
         return `assets/videos/${vidSrc}.mp4`;
     }
 
+    // Arrow function implementation
+    const getVideoSource = (vidSrc) => `assets/videos/${vidSrc}.mp4`;
+
     // Rewriting vidArr
     let vidArr = Array.apply(null, Array(10)).map((x, i) => ("vid" + i));
 
