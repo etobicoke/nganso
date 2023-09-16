@@ -5,6 +5,6 @@ export default defineConfig({
     site: 'https://etobicoke.github.io',
     markdown: {
         // Can be 'shiki' (default), 'prism' or false to disable highlighting
-        syntaxHighlight: 'prism',
-    },
+        syntaxHighlight: 'prism'
+    }
 });
