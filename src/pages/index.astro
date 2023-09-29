@@ -61,7 +61,7 @@ import { Prism } from '@astrojs/prism';
     const getVidSource = (vidSrc) => `assets/videos/${vidSrc}.mp4`;
 
     // Rewriting vidArr
-    let vidArr = Array.apply(null, Array(10)).map((x, i) => ("vid" + i));
+    let vidArr = Array.apply(null, Array(10)).map((x, v) => ("vid" + v));
 
     // Selecting the video element
     let videoPlayer = document.getElementsByTagName('video')[0];
