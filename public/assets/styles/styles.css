@@ -16,6 +16,7 @@ body {
     height: 100vh;
     position: relative;
 }
+
 video {
     object-fit: cover;
     position: absolute;
@@ -23,6 +24,7 @@ video {
     height: 100%;
     z-index: 1;
 }
+
 .overlay {
     position: absolute;
     top: 0;
@@ -32,6 +34,7 @@ video {
     z-index: 2;
     background: rgba(0,0,0,0.6);
 }
+
 .home-content {
     width: auto;
     margin: 0 auto;
@@ -40,6 +43,7 @@ video {
     color: #fff;
     z-index: 3;
 }
+
 .home-content h1 {
     text-align: center;
     font-size: 85px;
@@ -102,6 +106,7 @@ video {
     background: #fff;
     margin: 40px auto;
 }
+
 .home-content button {
     display: block;
     font-size: 20px;
