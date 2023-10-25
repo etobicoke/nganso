@@ -57,14 +57,17 @@ const { title } = Astro.props as Props;
 	}
 
 	:global(h1) {
-		font-size: var(--font-size-xl);
-	}
+      font-size: 32px; /* Fallback for older browsers */
+      font-size: var(--font-size-xl, 32px);
+    }
 
-	:global(h2) {
-		font-size: var(--font-size-lg);
-	}
+    :global(h2) {
+      font-size: 24px; /* Fallback for older browsers */
+      font-size: var(--font-size-lg, 24px);
+    }
 
-	:global(code) {
-		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-	}
+    :global(code) {
+      /* Monospaced font stack for code blocks */
+      font-family: Menlo, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace;
+    }
 </style>
