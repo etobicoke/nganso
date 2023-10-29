@@ -54,6 +54,14 @@ import { Prism } from '@astrojs/prism';
 		gap: 1rem;
 		padding: 0;
 	}
+
+	.link-card-grid > * {
+		transition: transform 0.3s ease;
+	}
+
+	.link-card-grid > *:hover {
+		transform: scale(1.05);
+	}
 </style>
 <script>
   // Self-invoking function on page load.
