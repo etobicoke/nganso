@@ -95,28 +95,6 @@ import { Prism } from '@astrojs/prism';
   })();
   */
 
-  // Possible version of above logic.
-  /*
-    (function initializeVideoPlayer() {
-      // Define video sources
-      const videoSources = Array.from({ length: 10 }, (_, index) => `assets/videos/vid${index}.mp4`);
-
-      // Select the video element
-      const videoPlayer = document.querySelector('video');
-
-      // Get a random video source
-      const randomVideoIndex = Math.floor(Math.random() * videoSources.length);
-      const randomVideoSource = videoSources[randomVideoIndex];
-
-      // Set the video source attribute
-      videoPlayer.src = randomVideoSource;
-
-      // Load the video
-      videoPlayer.load();
-    })();
-    */
-
-
     // Way better version?
     // Wait for the DOM content to be fully loaded before executing the script
     document.addEventListener("DOMContentLoaded", function() {
