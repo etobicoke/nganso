@@ -1,4 +1,4 @@
-# Welcome to my personal website
+# Welcome to my Personal Website
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
 
