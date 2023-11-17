@@ -2,7 +2,7 @@
 
 ## 🚀 Project Structure
 
-Inside of your Nganso project, you'll see the following folders and files:
+Inside of my project, you'll see the following folders and files:
 
 ```
 /
