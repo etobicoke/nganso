@@ -69,32 +69,6 @@ import { Prism } from '@astrojs/prism';
 	}
 </style>
 <script>
-/*
-  // Self-invoking function on page load.
-  (function(){
-    // Arrow function implementation for video retrieval
-    const getVidSource = (videoSrc) => `assets/videos/${videoSrc}.mp4`;
-
-    // Rewriting vidArr
-    let vidArr = Array.apply(null, Array(10)).map((x, v) => ("vid" + v));
-
-    // Selecting the video element
-    let videoPlayer = document.getElementsByTagName('video')[0];
-
-    // Randomly retrieving video from vidArr array
-    let video = vidArr[Math.floor(Math.random()*vidArr.length)];
-
-    // Get video URL
-    let srcAttr = getVidSource(video);
-
-    // Setting video source attribute
-    document.getElementById("video").setAttribute("src", srcAttr);
-
-    // Loading the video
-    videoPlayer.load();
-  })();
-  */
-
     // Way better version?
     // Wait for the DOM content to be fully loaded before executing the script
     document.addEventListener("DOMContentLoaded", function() {
