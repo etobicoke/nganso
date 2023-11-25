@@ -9,7 +9,7 @@ const { title } = Astro.props as Props;
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-	    // TODO: Migrate to GA4
+	    <!-- TODO: Migrate to GA4 -->
 	    <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57269361-1"></script>
         <script>
@@ -28,6 +28,9 @@ const { title } = Astro.props as Props;
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,600&display=swap" rel="stylesheet">
+        <style lang="scss">
+            @import '/public/assets/styles/test.scss';
+        </style>
 	</head>
 	<body>
 		<slot />
