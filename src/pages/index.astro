@@ -78,7 +78,7 @@ import { Prism } from '@astrojs/prism';
         // Create an array of video IDs (e.g., ["vid0", "vid1", ...])
         let vidArr = [];
         for (let v = 0; v < 10; v++) {
-        vidArr.push("vid" + v);
+            vidArr.push("vid" + v);
         }
 
         // Find the video element with the ID "video"
@@ -86,8 +86,8 @@ import { Prism } from '@astrojs/prism';
 
         // Check if the video element was found
         if (!videoElement) {
-        console.error("Video element not found.");
-        return;
+            console.error("Video element not found.");
+            return;
         }
 
         // Choose a random video ID from the array
