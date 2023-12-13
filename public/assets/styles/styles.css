@@ -120,7 +120,7 @@ video {
     cursor: pointer;
 }
 
-/*
+/* Sass version of above code
 
 // Variables
 $primary-font: 'Lora', serif;
