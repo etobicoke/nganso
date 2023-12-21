@@ -2,7 +2,7 @@
 
 ## 🚀 Project Structure
 
-Inside of my project, you'll see the following folders and files:
+Inside of the project, you'll see the following folders and files:
 
 ```
 /
@@ -19,8 +19,6 @@ Inside of my project, you'll see the following folders and files:
 │       └── index.astro
 └── package.json
 ```
-
-
 
 Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
 
