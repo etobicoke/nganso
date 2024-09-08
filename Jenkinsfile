@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', credentialsId: '5cac09d2-e621-4aba-af30-c5fe50d87587', url: 'git@github.com:etobicoke/nganso.git'
+                git branch: 'master', credentialsId: '5cac09d2-e621-4aba-af30-c5fe50d87587', url: 'git@github.com:etobicoke/nganso.git'
             }
         }
         stage('Install Dependencies') {
