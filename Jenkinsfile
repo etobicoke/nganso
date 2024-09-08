@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', credentialsId: 'your-ssh-credentials-id', url: 'git@github.com:etobicoke/nganso.git'
+                git branch: 'main', credentialsId: 'jenkins', url: 'git@github.com:etobicoke/nganso.git'
             }
         }
         stage('Install Dependencies') {
