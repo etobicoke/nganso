@@ -18,8 +18,9 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                // Check if the process exists, start it if not, otherwise reload it
+                // Ensure the correct PM2 environment is loaded
                 sh '''
+                export PM2_HOME=/var/lib/jenkins/.pm2
                 if pm2 describe nganso > /dev/null; then
                   pm2 reload nganso --update-env
                 else
