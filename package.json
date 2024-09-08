@@ -15,9 +15,7 @@
     "framer-motion": "^10.17.12",
     "json5": "^2.2.3",
     "pm2": "^5.3.0",
-    "sass": "^1.69.5"
-  },
-  "devDependencies": {
+    "sass": "^1.69.5",
     "astro": "^1.0.8"
   }
 }
