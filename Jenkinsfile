@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'master', credentialsId: 'jenkins', url: 'git@github.com:etobicoke/nganso.git'
+                git branch: 'master', credentialsId: 'your-ssh-credentials-id', url: 'git@github.com:etobicoke/nganso.git'
             }
         }
         stage('Install Dependencies') {
@@ -18,9 +18,13 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                // PM2 command to reload the app without downtime
+                // Check if the process exists, start it if not, otherwise reload it
                 sh '''
-                pm2 reload nganso --update-env
+                if pm2 describe nganso > /dev/null; then
+                  pm2 reload nganso --update-env
+                else
+                  pm2 start npm --name "nganso" -- start
+                fi
                 '''
             }
         }
