@@ -3,22 +3,24 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'master', credentialsId: 'your-ssh-credentials-id', url: 'git@github.com:etobicoke/nganso.git'
+                git branch: 'main', credentialsId: '5cac09d2-e621-4aba-af30-c5fe50d87587', url: 'git@github.com:etobicoke/nganso.git'
             }
         }
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                // Install only production dependencies using npm ci
+                sh 'NODE_ENV=production npm ci'
             }
         }
-        stage('Build') {
+        stage('Build for Production') {
             steps {
+                // Build the project for production
                 sh 'npm run build'
             }
         }
-        stage('Deploy') {
+        stage('Deploy with PM2') {
             steps {
-                // Ensure the correct PM2 environment is loaded
+                // Deploy using PM2
                 sh '''
                 export PM2_HOME=/var/lib/jenkins/.pm2
                 if pm2 describe nganso > /dev/null; then
@@ -26,6 +28,7 @@ pipeline {
                 else
                   pm2 start npm --name "nganso" -- start
                 fi
+                pm2 save
                 '''
             }
         }
