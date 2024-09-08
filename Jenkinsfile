@@ -34,8 +34,14 @@ pipeline {
         }
     }
     post {
-        always {
-            cleanWs()
+        failure {
+            cleanWs()  // Clean workspace only on failure
+        }
+        success {
+            // Remove only temporary build artifacts or logs that are not needed
+            sh 'rm -rf /var/lib/jenkins/workspace/nganso-deployment/tmp'
+            sh 'rm -rf /var/lib/jenkins/workspace/nganso-deployment/.cache'
+            // Keep the critical files like node_modules and package.json
         }
     }
 }
