@@ -141,5 +141,11 @@ body {
         margin: 50px auto 0;
         padding: 16px 30px;
         cursor: pointer;
+        transition: background 0.3s, color 0.3s;
+
+        &:hover {
+            background: $text-color;
+            color: $background-color;
+        }
     }
 }
