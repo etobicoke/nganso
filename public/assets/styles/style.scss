@@ -15,6 +15,12 @@ $button-border-color: #f1f1f1;
   transform: translate(-50%, -50%);
 }
 
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 // Reset
 *,
 ::before,
@@ -83,8 +89,7 @@ body {
         }
 
         .logo-section {
-            display: flex;
-            justify-content: center;
+            @include flex-center;
             margin-top: 25px;
 
             div span {
