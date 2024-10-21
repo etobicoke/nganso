@@ -9,8 +9,8 @@ Inside the project, you'll see the following folders and files:
 ├── public/
 │   ├── assets/
 │       └── images
-        └── styles
-        └── videos
+│        └── styles
+│        └── videos
 ├── src/
 │   ├── components/
 │   │   └── Card.astro
