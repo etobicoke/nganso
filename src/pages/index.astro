@@ -69,36 +69,33 @@ import { Prism } from '@astrojs/prism';
 	}
 </style>
 <script>
-    // Wait for the DOM content to be fully loaded before executing the script
-    document.addEventListener("DOMContentLoaded", function() {
-        // Function to construct the video source URL
+    document.addEventListener("DOMContentLoaded", () => {
         const getVidSource = (videoSrc) => `assets/videos/${videoSrc}.mp4`;
 
-        // Create an array of video IDs (e.g., ["vid0", "vid1", "vid2", ...])
-        let vidArr = [];
-        for (let v = 0; v < 10; v++) {
-            vidArr.push("vid" + v);
-        }
+        // Construct the array using Array.from for better readability
+        const vidArr = Array.from({ length: 10 }, (_, index) => `vid${index}`);
 
-        // Find the video element with the ID "video"
         const videoElement = document.getElementById("video");
 
-        // Check if the video element was found
         if (!videoElement) {
-            console.error("Video element not found.");
+            console.error("Error: Video element with ID 'video' not found in the DOM.");
             return;
         }
 
-        // Choose a random video ID from the array
-        const video = vidArr[Math.floor(Math.random() * vidArr.length)];
+        // Randomly select a video ID and set the source
+        const selectedVideo = vidArr[Math.floor(Math.random() * vidArr.length)];
+        const srcAttr = getVidSource(selectedVideo);
 
-        // Generate the video source URL based on the chosen video ID
-        const srcAttr = getVidSource(video);
-
-        // Set the video source attribute
+        // Set the video source and load it
         videoElement.setAttribute("src", srcAttr);
-
-        // Load the video
         videoElement.load();
+
+        // Optional: Add an event listener for error handling
+        videoElement.addEventListener("error", () => {
+            console.error(`Failed to load the video from source: ${srcAttr}`);
+        });
+
+        // Log the selected video for debugging
+        console.log(`Video loaded: ${srcAttr}`);
     });
 </script>
