@@ -63,6 +63,7 @@ body {
         width: auto;
         margin: 0 auto;
         @include center;
+        //top: 150px; TODO
         top: 150px;
         color: $text-color;
         z-index: 3;
