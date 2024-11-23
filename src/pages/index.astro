@@ -69,30 +69,38 @@ import { Prism } from '@astrojs/prism';
 	}
 </style>
 <script>
-    (function(){
-        // Retrieving Video Source
-        function getVidSource (vidSrc) {
-            return `assets/videos/${vidSrc}.mp4`;
+    (function() {
+        // Function to construct video source URL
+        const getVidSource = (vidSrc) => `assets/videos/${vidSrc}.mp4`;
+
+        // Generate video ID array dynamically
+        const vidArr = Array.from({ length: 10 }, (_, i) => `vid${i}`);
+
+        // Select the video element
+        const videoPlayer = document.getElementsByTagName("video")[0];
+
+        // Check if the video element exists
+        if (!videoPlayer) {
+            console.error("Error: <video> element with ID 'video' not found.");
+            return;
         }
 
-        // Arrow function implementation
-        const getVideoSource = (vidSrc) => `assets/videos/${vidSrc}.mp4`;
+        // Randomly select a video from the array
+        const selectedVideo = vidArr[Math.floor(Math.random() * vidArr.length)];
 
-        // Rewriting vidArr
-        let vidArr = Array.apply(null, Array(10)).map((x, i) => ("vid" + i));
+        // Construct the video source URL
+        const srcAttr = getVidSource(selectedVideo);
 
-        let videoPlayer = document.getElementsByTagName('video')[0];
+        // Set the video source and load it
+        videoPlayer.setAttribute("src", srcAttr);
+        console.log(`Video source set to: ${srcAttr}`);
 
-        // Randomly retrieving video from vidArr array
-        let video = vidArr[Math.floor(Math.random()*vidArr.length)];
-
-        // Get video URL
-        let srcAttr = getVidSource(video);
-
-        // Setting video source attribute
-        document.getElementById("video").setAttribute("src", srcAttr);
-
-        // Loading the video
-        videoPlayer.load();
+        try {
+            videoPlayer.load();
+            console.log("Video loaded successfully.");
+        } catch (error) {
+            console.error("Error loading video:", error);
+        }
     })();
 </script>
+
