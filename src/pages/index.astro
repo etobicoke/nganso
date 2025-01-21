@@ -115,6 +115,7 @@ import Layout from '../layouts/Layout.astro';
         });
 
         // Optional: Add an event listener for when the video is ready
+        // TODO: Is below code necessary
         videoElement.addEventListener("loadedmetadata", () => {
             // TODO: review below logic
             console.log(`Video successfully loaded: ${srcAttr}`);
