@@ -109,6 +109,7 @@ import Layout from '../layouts/Layout.astro';
         videoElement.load();
 
         // Handle video loading errors
+        // TODO: review below logic
         videoElement.addEventListener("error", () => {
             console.error(`Failed to load the video from source: ${srcAttr}`);
             // alert("Sorry, the video could not be loaded. Please try again later.");
