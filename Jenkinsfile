@@ -36,7 +36,8 @@ pipeline {
     }
     post {
         failure {
-            cleanWs()  // Clean workspace only on failure
+            // Clean workspace only on failure
+            cleanWs()
         }
         success {
             // Remove only temporary build artifacts or logs that are not needed
