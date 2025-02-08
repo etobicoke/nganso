@@ -41,9 +41,9 @@ pipeline {
         }
         success {
             // Remove only temporary build artifacts or logs that are not needed
+            // Keep the critical files like node_modules and package.json
             sh 'rm -rf /var/lib/jenkins/workspace/nganso-deployment/tmp'
             sh 'rm -rf /var/lib/jenkins/workspace/nganso-deployment/.cache'
-            // Keep the critical files like node_modules and package.json
         }
     }
 }
