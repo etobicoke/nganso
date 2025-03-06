@@ -5,7 +5,7 @@ import Layout from '../layouts/Layout.astro';
 <Layout title="ngan.so --- coming soon">
 	<div class="home">
 	    <video id="bg-video" autoplay muted loop>
-	        <source src="/assets/videos/vid0.mp4" type="video/mp4" id="vid" />
+	        <source src="/assets/videos/vid0.mp4" type="video/mp4" id="video" />
         </video>
         <div class="overlay"></div>
         <div class="home-content">
@@ -87,7 +87,7 @@ import Layout from '../layouts/Layout.astro';
 
         const VIDEO_DIR = "assets/videos"; // Directory where videos are stored
         const VIDEO_COUNT = 10;          // Total number of videos available
-        const VIDEO_ELEMENT_ID = "vid";  // ID of the <video> element
+        const VIDEO_ELEMENT_ID = "video";  // ID of the <video> element
 
         /**
          * Helper function to construct the video file path.
