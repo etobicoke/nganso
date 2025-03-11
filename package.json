@@ -12,10 +12,10 @@
   },
   "dependencies": {
     "@astrojs/prism": "^1.0.2",
-    "framer-motion": "^10.17.12",
+    "astro": "^1.0.8",
+    "framer-motion": "^10.18.0",
     "json5": "^2.2.3",
     "pm2": "^5.3.0",
-    "sass": "^1.69.5",
-    "astro": "^1.0.8"
+    "sass": "^1.69.5"
   }
 }
