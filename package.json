@@ -12,7 +12,10 @@
   },
   "dependencies": {
     "@astrojs/prism": "^1.0.2",
+    "@keystone-6/auth": "^8.1.0",
+    "@keystone-6/core": "^6.4.0",
     "astro": "^1.0.8",
+    "dotenv": "^16.4.7",
     "framer-motion": "^10.18.0",
     "json5": "^2.2.3",
     "lenis": "^1.2.3",
