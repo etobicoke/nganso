@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 	
 	// Randomly select a video from the array
+	// TODO: review below logic - make random better
 	const selectedVideo = vidArr[Math.floor(Math.random() * vidArr.length)];
 	const srcAttr = getVidSource(selectedVideo);
 	
