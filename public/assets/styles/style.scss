@@ -11,6 +11,8 @@ $small-font-size: 1.3rem;
 $padding-small: 12px 9px;
 
 // Mixins
+//TODO: Refactor and integrate with Astro
+
 @mixin center {
     position: absolute;
     top: 50%;
