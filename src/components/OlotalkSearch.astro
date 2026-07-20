@@ -18,13 +18,31 @@ interface Props {
   widgetId?: string;
   /** Origin of the Olotalk BFF serving /public/v1/widgets/:id/search. */
   apiOrigin?: string;
+  /**
+   * Visible launcher. The palette binds ⌘K on its own, but a keyboard-only
+   * surface is undiscoverable — nothing on the page hints that it exists.
+   * "pill" renders an unobtrusive fixed launcher; "none" is script-only for
+   * sites that wire their own trigger into existing chrome.
+   */
+  trigger?: "pill" | "none";
 }
 
 const {
   widgetId = "wgt_dev_oltk_mbx1jhr6",
   apiOrigin = "http://127.0.0.1:3007",
+  trigger = "pill",
 } = Astro.props;
 ---
+
+{trigger === "pill" && (
+  <button type="button" class="olotalk-launcher" aria-label="Search this site" data-olotalk-launcher>
+    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" />
+    </svg>
+    <span>Search</span>
+    <kbd>⌘K</kbd>
+  </button>
+)}
 
 <link rel="stylesheet" href="/olotalk/olotalk-search.css" />
 <script is:inline src="/olotalk/olotalk-search.iife.js"></script>
@@ -41,5 +59,49 @@ const {
       origin: apiOrigin,
       cssUrl: "/olotalk/olotalk-search.css",
     });
+    var launcher = document.querySelector("[data-olotalk-launcher]");
+    if (launcher) {
+      launcher.addEventListener("click", function () {
+        window.__olotalkSearch.open();
+      });
+    }
   })();
 </script>
+
+<style>
+  /* Deliberately neutral: inherits the page's colours via currentColor and
+     color-mix, so it sits on any theme without importing a design system. */
+  .olotalk-launcher {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 2147483000; /* below the palette's own overlay, above page chrome */
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 13px;
+    font: inherit;
+    font-size: 14px;
+    line-height: 1;
+    color: inherit;
+    cursor: pointer;
+    background: color-mix(in srgb, Canvas 92%, CanvasText 8%);
+    border: 1px solid color-mix(in srgb, CanvasText 18%, transparent);
+    border-radius: 999px;
+    box-shadow: 0 2px 10px color-mix(in srgb, CanvasText 14%, transparent);
+  }
+  .olotalk-launcher:hover {
+    border-color: color-mix(in srgb, CanvasText 38%, transparent);
+  }
+  .olotalk-launcher kbd {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 11px;
+    padding: 2px 5px;
+    border-radius: 4px;
+    border: 1px solid color-mix(in srgb, CanvasText 18%, transparent);
+    opacity: 0.75;
+  }
+  @media (max-width: 640px) {
+    .olotalk-launcher span { display: none; }
+  }
+</style>
