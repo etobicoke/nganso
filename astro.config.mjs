@@ -3,7 +3,7 @@ import path from 'path';
 
 // https://astro.build/config
 export default defineConfig({
-    site: 'https://etobicoke.github.io',
+    site: 'https://www.nganso.com',
     markdown: {
         // Can be 'shiki' (default), 'prism' or false to disable highlighting
         syntaxHighlight: 'prism'
