@@ -1,0 +1,45 @@
+---
+// Olotalk grounded ⌘K search — DEMO INTEGRATION.
+//
+// Mounts a search palette that answers only from this site's own content. Press
+// ⌘K (or Ctrl+K) on any page that renders this component.
+//
+// This is a local demo, not production-ready:
+//   • `apiOrigin` points at a BFF running on localhost. There is no deployed
+//     Olotalk backend behind nganso.com, so this does nothing for real visitors.
+//   • The corpus was ingested from the LOCAL dev server (localhost:2336), so
+//     result links carry that host. Re-ingest against the public site before
+//     this could ship.
+//
+// To remove: delete this component, the three <OlotalkSearch /> usages, and
+// public/olotalk/.
+interface Props {
+  /** Olotalk widget whose corpus is searched. */
+  widgetId?: string;
+  /** Origin of the Olotalk BFF serving /public/v1/widgets/:id/search. */
+  apiOrigin?: string;
+}
+
+const {
+  widgetId = "wgt_dev_oltk_mbx1jhr6",
+  apiOrigin = "http://127.0.0.1:3007",
+} = Astro.props;
+---
+
+<link rel="stylesheet" href="/olotalk/olotalk-search.css" />
+<script is:inline src="/olotalk/olotalk-search.iife.js"></script>
+<script is:inline define:vars={{ widgetId, apiOrigin }}>
+  // The bundle exposes the IIFE global `OlotalkSearch`. Mounting is the entire
+  // integration — the palette lives in its own shadow root and binds ⌘K itself.
+  (function () {
+    if (!window.OlotalkSearch) {
+      console.warn("[olotalk] search bundle failed to load");
+      return;
+    }
+    window.__olotalkSearch = window.OlotalkSearch.createSearch({
+      widgetId: widgetId,
+      origin: apiOrigin,
+      cssUrl: "/olotalk/olotalk-search.css",
+    });
+  })();
+</script>
