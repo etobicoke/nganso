@@ -1,0 +1,156 @@
+---
+// /writing — index of posts. Astro 1.x: Astro.glob pulls every markdown post in
+// this folder; we sort newest-first by the `date` frontmatter field. Adding a
+// new src/pages/writing/*.md file makes it show up here automatically.
+const posts = (await Astro.glob('./*.md'))
+  .sort((a, b) =>
+    new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf());
+import OlotalkSearch from "../../components/OlotalkSearch.astro";
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google Analytics (gtag) — inlined verbatim so Astro leaves it untouched -->
+  <script async is:inline src="https://www.googletagmanager.com/gtag/js?id=G-1KVEFPH9TZ"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-1KVEFPH9TZ');
+  </script>
+
+  <title>Writing · Gustave Nganso</title>
+  <meta name="description" content="Notes from Gustave Nganso on shipping AI in production — retrieval, evals, and what the demos leave out." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style is:global>
+    :root {
+      --bg: #ffffff;
+      --ink: #101418;
+      --gray: #5b6470;
+      --hairline: #e6e8eb;
+      --accent: #2547f4;
+      --sans: "Instrument Sans", system-ui, -apple-system, sans-serif;
+      --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+      --measure: 720px;
+      --pad: 24px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0; background: var(--bg); color: var(--ink);
+      font-family: var(--sans); font-size: 18px; line-height: 1.7;
+      -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+    }
+    a { color: inherit; }
+    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+    .wrap {
+      width: 100%; max-width: var(--measure); margin: 0 auto;
+      padding-left: var(--pad); padding-right: var(--pad);
+    }
+
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255, 255, 255, 0.72);
+      -webkit-backdrop-filter: saturate(180%) blur(14px);
+      backdrop-filter: saturate(180%) blur(14px);
+      border-bottom: 1px solid var(--hairline);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; height: 64px;
+    }
+    .nav-name {
+      font-weight: 600; letter-spacing: -0.02em; font-size: 16px;
+      text-decoration: none; white-space: nowrap;
+    }
+    .nav-back {
+      font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.02em;
+      color: var(--gray); text-decoration: none; transition: color 0.18s ease;
+    }
+    .nav-back:hover { color: var(--accent); }
+
+    .head { padding-top: 72px; padding-bottom: 44px; }
+    .label {
+      font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--gray); margin: 0 0 20px;
+    }
+    .title {
+      margin: 0; font-weight: 700; font-size: clamp(34px, 6vw, 56px);
+      line-height: 1.04; letter-spacing: -0.03em;
+    }
+    .intro {
+      margin: 24px 0 0; max-width: 40em; color: var(--gray);
+      font-size: clamp(18px, 2.2vw, 21px); line-height: 1.55;
+    }
+
+    .list { padding-bottom: 96px; }
+    .entry {
+      display: block; text-decoration: none; padding: 30px 0;
+      border-top: 1px solid var(--hairline);
+      transition: opacity 0.18s ease;
+    }
+    .entry:last-child { border-bottom: 1px solid var(--hairline); }
+    .entry:hover .entry-title { color: var(--accent); }
+    .entry-date {
+      font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.04em;
+      color: var(--gray); margin: 0 0 10px;
+    }
+    .entry-title {
+      margin: 0; font-size: clamp(21px, 3vw, 26px); font-weight: 600;
+      letter-spacing: -0.02em; line-height: 1.2; transition: color 0.18s ease;
+    }
+    .entry-desc { margin: 10px 0 0; color: var(--gray); font-size: 16px; line-height: 1.55; }
+    .entry-more {
+      display: inline-block; margin-top: 14px; font-family: var(--mono);
+      font-size: 12.5px; color: var(--accent);
+    }
+
+    .empty { color: var(--gray); padding: 30px 0 96px; }
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="nav-name" href="/">Gustave Nganso</a>
+      <a class="nav-back" href="/">← Home</a>
+    </div>
+  </header>
+
+  <main>
+    <header class="wrap head">
+      <p class="label">Writing</p>
+      <h1 class="title">Notes from the field</h1>
+      <p class="intro">
+        Short, opinionated pieces on getting AI from &ldquo;we should be using
+        this&rdquo; to something running in production. New posts land here
+        first — no newsletter, no popups.
+      </p>
+    </header>
+
+    <section class="wrap list">
+      {posts.length === 0 && <p class="empty">Nothing published yet. Soon.</p>}
+      {posts.map((post) => (
+        <a class="entry" href={post.url}>
+          <p class="entry-date">{post.frontmatter.dateLabel}</p>
+          <h2 class="entry-title">{post.frontmatter.title}</h2>
+          {post.frontmatter.description && (
+            <p class="entry-desc">{post.frontmatter.description}</p>
+          )}
+          <span class="entry-more">Read →</span>
+        </a>
+      ))}
+    </section>
+  </main>
+
+<OlotalkSearch />
+</body>
+</html>

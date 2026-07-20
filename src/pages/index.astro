@@ -1,82 +1,1250 @@
 ---
-import Layout from '../layouts/Layout.astro';
+// Homepage — Gustave Nganso.
+// Self-contained page: it owns its <head> and a global <style> block, so it does
+// NOT use Layout.astro (that layout carries the old site's video/coming-soon
+// styles). Google Analytics (gtag) is inlined below to preserve the site's
+// existing tracking (G-1KVEFPH9TZ). The old homepage now lives at /coming-soon.
+import OlotalkSearch from "../components/OlotalkSearch.astro";
 ---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<Layout title="ngan.so -- coming soon">
-	<div class="home">
-	    <video id="bg-video" autoplay muted loop>
-	        <source src="/assets/videos/vid0.mp4" type="video/mp4" id="video" />
-        </video>
-        <div class="overlay"></div>
-        <div class="home-content">
-            <h1>
-                <span>I'm on it.</span>
-            </h1>
-            <h5 class="meantime">In the meantime, please feel free to e-mail me at:</h5>
-            <h4>gustave `at` nganso `dot` com</h4>
-            <section class="logo-section">
-                <div>
-                    <span class="github-logo">
-                        <a href="https://github.com/etobicoke/">
-                            <img src="/assets/images/svg/iconmonstr-github-3.svg" alt="GitHub Logo"/>
-                        </a>
-                    </span>
-                    <span class="linkedin-logo">
-                        <a href="https://www.linkedin.com/in/gnganso-javascript-developer-engineer-architect/">
-                            <img src="/assets/images/svg/iconmonstr-linkedin-3.svg" alt="LinkedIn Logo"/>
-                        </a>
-                    </span>
-                </div>
-            </section>
+  <!-- Google Analytics (gtag) — inlined verbatim so Astro leaves it untouched -->
+  <script async is:inline src="https://www.googletagmanager.com/gtag/js?id=G-1KVEFPH9TZ"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-1KVEFPH9TZ');
+  </script>
+
+  <!-- Marker class so reveal styles apply only when JS is on (prevents a flash of hidden content) -->
+  <script is:inline>document.documentElement.classList.add('js');</script>
+
+  <title>Gustave Nganso · Generative AI in your company. I'm on it.</title>
+  <meta name="description" content="Gustave Nganso — Toronto-based generative AI (GenAI) consultant. Nearly 20 years shipping production systems; I help enterprises put generative AI to work — RAG, LLM assistants, and automation that actually runs." />
+
+  <!-- Fonts: Instrument Sans (display + body), IBM Plex Mono (metadata). No external JS. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style is:global>
+    /* ---------- Design tokens ---------- */
+    :root {
+      --bg: #ffffff;
+      --ink: #101418;
+      --gray: #5b6470;
+      --hairline: #e6e8eb;
+      --accent: #2547f4;
+
+      --sans: "Instrument Sans", system-ui, -apple-system, sans-serif;
+      --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+      --maxw: 880px;
+      --pad: 24px;
+    }
+
+    /* ---------- Reset ---------- */
+    *, *::before, *::after { box-sizing: border-box; }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 88px; /* offset for the sticky nav */
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 17px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    a { color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* ---------- Shared bits ---------- */
+    .wrap {
+      width: 100%;
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding-left: var(--pad);
+      padding-right: var(--pad);
+    }
+
+    /* Mono metadata: labels, dates, tags, links */
+    .mono {
+      font-family: var(--mono);
+      font-size: 12.5px;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
+
+    .section {
+      padding-top: 84px;
+      padding-bottom: 84px;
+      border-top: 1px solid var(--hairline);
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 12.5px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin: 0 0 40px;
+    }
+
+    .accent { color: var(--accent); }
+
+    /* ---------- Focus visibility ---------- */
+    a:focus-visible,
+    summary:focus-visible,
+    button:focus-visible,
+    .btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    /* ---------- Sticky nav ---------- */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.72);
+      -webkit-backdrop-filter: saturate(180%) blur(14px);
+      backdrop-filter: saturate(180%) blur(14px);
+      border-bottom: 1px solid var(--hairline);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      height: 64px;
+    }
+    .nav-name {
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      font-size: 16px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+    }
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 12.5px;
+      letter-spacing: 0.02em;
+      color: var(--gray);
+      text-decoration: none;
+      transition: color 0.18s ease;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ---------- Hero ---------- */
+    .hero { padding-top: 92px; padding-bottom: 92px; }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--gray);
+      margin: 0 0 34px;
+    }
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex: none;
+      position: relative;
+    }
+    .dot::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2.2s ease-out infinite;
+    }
+    @keyframes pulse {
+      0%   { transform: scale(1);   opacity: 0.6; }
+      70%  { transform: scale(2.6); opacity: 0; }
+      100% { transform: scale(2.6); opacity: 0; }
+    }
+
+    .headline {
+      margin: 0;
+      font-weight: 700;
+      font-size: clamp(42px, 8vw, 84px);
+      line-height: 1.02;
+      letter-spacing: -0.035em;
+    }
+    .headline .line2 { display: block; }
+
+    .lede {
+      margin: 34px 0 0;
+      max-width: 620px;
+      font-size: clamp(18px, 2.2vw, 21px);
+      line-height: 1.55;
+      color: var(--gray);
+    }
+    .lede strong { color: var(--ink); font-weight: 600; }
+
+    .hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 26px;
+      margin-top: 40px;
+    }
+    .hero-links a {
+      font-family: var(--mono);
+      font-size: 12.5px;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--hairline);
+      padding-bottom: 3px;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+    .hero-links a:hover { color: var(--accent); border-color: var(--accent); }
+    .hero-links a::before { content: "↗ "; color: var(--gray); }
+
+    /* ---------- Services (1px-gap grid via background trick) ---------- */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--hairline);
+      border: 1px solid var(--hairline);
+    }
+    .service {
+      background: var(--bg);
+      padding: 32px 28px 36px;
+    }
+    .service-num {
+      font-family: var(--mono);
+      font-size: 12.5px;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      margin: 0 0 20px;
+    }
+    .service h3 {
+      margin: 0 0 12px;
+      font-size: 21px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    .service p {
+      margin: 0;
+      color: var(--gray);
+      font-size: 15.5px;
+      line-height: 1.55;
+    }
+
+    /* Embedded framing + engagement models */
+    .services-intro,
+    .exp-intro {
+      margin: -16px 0 40px;
+      max-width: 640px;
+      font-size: clamp(17px, 2vw, 19px);
+      line-height: 1.55;
+      color: var(--gray);
+    }
+    .services-intro strong { color: var(--ink); font-weight: 600; }
+
+    .engagements {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 40px;
+      padding-top: 36px;
+      border-top: 1px solid var(--hairline);
+    }
+    .engagement-kicker {
+      margin: 0 0 10px;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .engagement p {
+      margin: 0;
+      color: var(--gray);
+      font-size: 15.5px;
+      line-height: 1.55;
+    }
+    .engagement p strong { color: var(--ink); font-weight: 600; }
+
+    /* ---------- Trust strip (hero) ---------- */
+    .trust { margin-top: 52px; }
+    .trust-label {
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin: 0 0 14px;
+    }
+    .trust-names {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px 26px;
+      margin: 0;
+      padding: 0;
+    }
+    .trust-names li {
+      font-size: clamp(16px, 2.2vw, 19px);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+
+    /* ---------- Security & governance ---------- */
+    .gov-intro {
+      margin: -16px 0 44px;
+      max-width: 640px;
+      font-size: clamp(17px, 2vw, 19px);
+      line-height: 1.55;
+      color: var(--gray);
+    }
+    .gov-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 34px 48px;
+    }
+    .gov-item h3 {
+      margin: 0 0 8px;
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    .gov-mark { color: var(--accent); margin-right: 6px; }
+    .gov-item p {
+      margin: 0;
+      color: var(--gray);
+      font-size: 15.5px;
+      line-height: 1.55;
+    }
+
+    /* ---------- Selected work (details/summary) ---------- */
+    .work-list {
+      border-top: 1px solid var(--hairline);
+    }
+    .work-item {
+      border-bottom: 1px solid var(--hairline);
+    }
+    .work-summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 26px 0;
+      transform: translateX(4px);
+      transition: transform 0.2s ease;
+    }
+    .work-summary::-webkit-details-marker { display: none; }
+    .work-summary:hover { transform: translateX(12px); }
+    .work-name {
+      font-size: clamp(22px, 3.4vw, 30px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      transition: color 0.18s ease;
+    }
+    details[open] > .work-summary .work-name { color: var(--accent); }
+    .work-meta {
+      font-family: var(--mono);
+      font-size: 12.5px;
+      color: var(--gray);
+      white-space: nowrap;
+      flex: none;
+    }
+    .work-toggle { color: var(--accent); margin-left: 6px; }
+    details[open] .work-toggle .plus { display: none; }
+    details:not([open]) .work-toggle .minus { display: none; }
+
+    .work-body {
+      padding: 4px 0 30px;
+      max-width: 640px;
+    }
+    .tags {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0 0 20px;
+      padding: 0;
+    }
+    .tags li {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      letter-spacing: 0.02em;
+      color: var(--gray);
+      border: 1px solid var(--hairline);
+      border-radius: 999px;
+      padding: 4px 12px;
+    }
+    .work-body p {
+      margin: 0 0 18px;
+      color: var(--gray);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    .work-body p strong { color: var(--ink); font-weight: 600; }
+    .case-link {
+      font-family: var(--mono);
+      font-size: 12.5px;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.18s ease;
+    }
+    .case-link:hover { border-color: var(--accent); }
+    .case-link::after { content: " →"; }
+
+    /* ---------- Experience ---------- */
+    .exp-row {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 24px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--hairline);
+    }
+    .exp-row:first-of-type { border-top: 1px solid var(--hairline); }
+    .exp-date {
+      font-family: var(--mono);
+      font-size: 12.5px;
+      color: var(--gray);
+      padding-top: 4px;
+    }
+    .exp-role {
+      margin: 0 0 4px;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    .exp-company { color: var(--gray); }
+    .exp-detail {
+      margin: 8px 0 0;
+      color: var(--gray);
+      font-size: 15.5px;
+      line-height: 1.55;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 36px;
+      font-family: var(--mono);
+      font-size: 12.5px;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+      text-decoration: none;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      padding: 11px 22px;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+    .btn:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ---------- Writing ---------- */
+    .post {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--hairline);
+      text-decoration: none;
+      transform: translateX(0);
+      transition: transform 0.2s ease;
+    }
+    .post:first-of-type { border-top: 1px solid var(--hairline); }
+    .post:hover { transform: translateX(10px); }
+    .post-title {
+      font-size: clamp(18px, 2.6vw, 22px);
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      transition: color 0.18s ease;
+    }
+    .post:hover .post-title { color: var(--accent); }
+    .post-date {
+      font-family: var(--mono);
+      font-size: 12.5px;
+      color: var(--gray);
+      white-space: nowrap;
+      flex: none;
+    }
+    .writing-note {
+      margin: 28px 0 0;
+      font-style: italic;
+      color: var(--gray);
+      font-size: 15.5px;
+    }
+
+    /* ---------- Footer ---------- */
+    .footer { border-top: 1px solid var(--hairline); }
+    .cta {
+      margin: 0;
+      font-weight: 700;
+      font-size: clamp(30px, 5.2vw, 52px);
+      line-height: 1.06;
+      letter-spacing: -0.03em;
+      max-width: 720px;
+    }
+    .cta-email {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 5px;
+      text-decoration-thickness: 2px;
+    }
+    .fine-print {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px 26px;
+      margin-top: 56px;
+      font-family: var(--mono);
+      font-size: 12.5px;
+      color: var(--gray);
+    }
+    .fine-print a {
+      color: var(--gray);
+      text-decoration: none;
+      transition: color 0.18s ease;
+    }
+    .fine-print a:hover { color: var(--accent); }
+    .fine-print .links { display: flex; gap: 20px; }
+
+    /* ---------- Contact form ---------- */
+    .contact-form {
+      margin: 44px 0 8px;
+      max-width: 560px;
+      display: grid;
+      gap: 20px;
+    }
+    .field { display: grid; gap: 8px; }
+    .field label {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+    .field input,
+    .field textarea {
+      font-family: var(--sans);
+      font-size: 16px;
+      color: var(--ink);
+      background: var(--bg);
+      border: 1px solid var(--hairline);
+      border-radius: 8px;
+      padding: 12px 14px;
+      width: 100%;
+    }
+    .field textarea { min-height: 128px; resize: vertical; }
+    .field input:focus,
+    .field textarea:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+      border-color: var(--accent);
+    }
+    .btn-submit {
+      justify-self: start;
+      font-family: var(--mono);
+      font-size: 12.5px;
+      letter-spacing: 0.02em;
+      color: #fff;
+      background: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: 999px;
+      padding: 12px 24px;
+      cursor: pointer;
+      transition: opacity 0.18s ease;
+    }
+    .btn-submit:hover { opacity: 0.88; }
+    /* Honeypot: pushed off-screen; bots fill it and get rejected by Web3Forms */
+    .hp {
+      position: absolute !important;
+      left: -9999px !important;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+    .form-status {
+      margin: 2px 0 0;
+      font-family: var(--mono);
+      font-size: 12.5px;
+      min-height: 1.2em;
+      color: var(--gray);
+    }
+    .form-status.is-ok { color: var(--accent); }
+    .form-status.is-err { color: #c1121f; }
+
+    /* ---------- Motion layer (scroll reveals + micro-interactions) ---------- */
+    /* Reveal targets start hidden ONLY when JS is on and motion is allowed, so
+       no-JS and reduced-motion visitors always see content immediately. */
+    @media (prefers-reduced-motion: no-preference) {
+      html.js .hero > *,
+      html.js #services .section-label,
+      html.js #services .services-intro,
+      html.js .service,
+      html.js .engagement,
+      html.js #governance .section-label,
+      html.js .gov-intro,
+      html.js .gov-item,
+      html.js #work .section-label,
+      html.js .work-item,
+      html.js #experience .section-label,
+      html.js .exp-intro,
+      html.js .exp-row,
+      html.js #experience .btn,
+      html.js #writing .section-label,
+      html.js .post,
+      html.js .writing-note,
+      html.js #contact .cta,
+      html.js .contact-form,
+      html.js #contact .fine-print {
+        opacity: 0;
+        transform: translateY(22px) scale(0.97);
+        filter: blur(6px);
+        transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                    filter 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      html.js .is-visible {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+      }
+
+      /* Hero: cascade in on load */
+      html.js .hero .headline   { transition-delay: 0.12s; }
+      html.js .hero .lede       { transition-delay: 0.24s; }
+      html.js .hero .hero-links { transition-delay: 0.36s; }
+      html.js .hero .trust      { transition-delay: 0.48s; }
+
+      /* Stagger for items that enter together */
+      html.js .services-grid .service:nth-child(2)  { transition-delay: 0.12s; }
+      html.js .services-grid .service:nth-child(3)  { transition-delay: 0.24s; }
+      html.js .engagements .engagement:nth-child(2) { transition-delay: 0.12s; }
+      html.js .gov-item:nth-child(2)                { transition-delay: 0.08s; }
+      html.js .gov-item:nth-child(3)                { transition-delay: 0.14s; }
+      html.js .gov-item:nth-child(4)                { transition-delay: 0.20s; }
+      html.js .gov-item:nth-child(5)                { transition-delay: 0.26s; }
+      html.js .gov-item:nth-child(6)                { transition-delay: 0.32s; }
+      html.js .work-item:nth-of-type(2)             { transition-delay: 0.10s; }
+      html.js .work-item:nth-of-type(3)             { transition-delay: 0.20s; }
+      html.js #writing .post:nth-of-type(2)         { transition-delay: 0.10s; }
+    }
+
+    /* Work row: ease the body in when a project is opened */
+    details[open] .work-body {
+      animation: workReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    @keyframes workReveal {
+      from { opacity: 0; transform: translateY(-8px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* Nav links: an underline that draws in on hover/focus */
+    .nav-links a { position: relative; }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -4px;
+      height: 1px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.22s ease;
+    }
+    .nav-links a:hover::after,
+    .nav-links a:focus-visible::after { transform: scaleX(1); }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 720px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .gov-grid { grid-template-columns: 1fr; gap: 28px; }
+      .engagements { grid-template-columns: 1fr; gap: 28px; }
+      .exp-row { grid-template-columns: 1fr; gap: 6px; }
+      .exp-date { padding-top: 0; }
+      .nav-links { gap: 14px; }
+      .section { padding-top: 64px; padding-bottom: 64px; }
+      .hero { padding-top: 68px; padding-bottom: 68px; }
+    }
+    @media (max-width: 560px) {
+      /* Keep the nav usable: drop the middle links, keep Contact reachable */
+      .nav-links a.nav-hide { display: none; }
+    }
+
+    /* ---------- Reduced motion ---------- */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+      .dot::after { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= NAV ================= -->
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="nav-name" href="#top">Gustave Nganso</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a class="nav-hide" href="#services">Services</a>
+        <a class="nav-hide" href="#governance">Governance</a>
+        <a class="nav-hide" href="#work">Work</a>
+        <a class="nav-hide" href="#experience">Experience</a>
+        <a class="nav-hide" href="#writing">Writing</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ================= HERO ================= -->
+    <section class="hero wrap" aria-label="Introduction">
+      <p class="kicker mono">
+        <span class="dot" aria-hidden="true"></span>
+        Toronto, Canada · taking on new clients
+      </p>
+
+      <h1 class="headline">
+        AI in your company.
+        <span class="line2 accent">I'm on it.</span>
+      </h1>
+
+      <p class="lede">
+        A lot of companies are stuck at <strong>&ldquo;we should be using
+        generative AI.&rdquo;</strong> Getting to something real, running in
+        production, is the hard part. That&rsquo;s what I do.
+      </p>
+
+      <nav class="hero-links" aria-label="Elsewhere">
+        <!-- Profile links -->
+        <a href="https://github.com/etobicoke" rel="me">GitHub</a>
+        <a href="https://www.linkedin.com/in/gnganso-javascript-developer-engineer-architect/" rel="me">LinkedIn</a>
+        <a href="mailto:gustave@nganso.com">gustave@nganso.com</a>
+      </nav>
+
+      <!-- Trust strip: named enterprise clients as an at-a-glance credibility bar -->
+      <div class="trust" aria-label="Clients I have shipped production work for">
+        <p class="trust-label mono">Trusted with production systems at</p>
+        <ul class="trust-names">
+          <li>RBC</li>
+          <li>BMO</li>
+          <li>Bell Media</li>
+          <li>CIBC / Simplii</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= SERVICES ================= -->
+    <section class="section wrap" id="services" aria-labelledby="services-label">
+      <p class="section-label" id="services-label">How I work with companies</p>
+
+      <p class="services-intro">
+        I work <strong>embedded in your team</strong> &mdash; in your codebase,
+        your standups, your stack &mdash; and what I hand over is generative AI running in
+        production, not a deck about it. I handle the <strong>strategy up
+        front</strong>, the build in the middle, and a clean <strong>handover at
+        the end</strong>.
+      </p>
+
+      <div class="services-grid">
+        <article class="service">
+          <p class="service-num">01 · Assess</p>
+          <h3>AI opportunity audit</h3>
+          <p>
+            I go through your business and find the few places AI is worth the
+            trouble. You get a ranked shortlist, and an honest &ldquo;skip
+            it&rdquo; on everything else.
+          </p>
+        </article>
+
+        <article class="service">
+          <p class="service-num">02 · Build</p>
+          <h3>Integration &amp; custom builds</h3>
+          <p>
+            RAG assistants, document and email automation, AI features inside
+            your product. I build them to run in your stack and keep running
+            after I leave.
+          </p>
+        </article>
+
+        <article class="service">
+          <p class="service-num">03 · Enable</p>
+          <h3>Team training &amp; handover</h3>
+          <p>
+            I don&rsquo;t want to be a dependency. I document what I build, walk
+            your team through it, and hand over something they can run and
+            change on their own.
+          </p>
+        </article>
+      </div>
+
+      <!-- Two engagement models: solo, or an embedded senior team -->
+      <div class="engagements">
+        <div class="engagement">
+          <p class="engagement-kicker mono">Work with me</p>
+          <p>
+            I do the work myself, start to finish. Best fit for a focused build
+            or a company&rsquo;s first AI project.
+          </p>
         </div>
-	</div>
-</Layout>
-<style>
-	:root {
-		--astro-gradient: linear-gradient(0deg, #4f39fa, #171216);
-	}
+        <div class="engagement">
+          <p class="engagement-kicker mono">Work with my team</p>
+          <p>
+            For bigger jobs, I bring in other vetted <strong>senior
+            engineers</strong> who work the same embedded way. You get extra
+            capacity fast, and I stay accountable for what ships.
+          </p>
+        </div>
+      </div>
+    </section>
 
-	* {
-		box-sizing: border-box;
-		margin: 0;
-		padding: 0;
-	}
+    <!-- ================= SECURITY & GOVERNANCE ================= -->
+    <section class="section wrap" id="governance" aria-labelledby="gov-label">
+      <p class="section-label" id="gov-label">Security &amp; governance</p>
 
-	h1 {
-		margin: 2rem 0;
-	}
+      <p class="gov-intro">
+        Enterprise AI lives or dies on the boring parts: where the data sits,
+        who&rsquo;s allowed to see what, and whether you can prove what the
+        system did. I build for those from the first commit, not the last
+        sprint.
+      </p>
 
-	main {
-		margin: auto;
-		padding: 1.5em;
-		max-width: 60ch;
-	}
+      <div class="gov-grid">
+        <article class="gov-item">
+          <h3><span class="gov-mark" aria-hidden="true">&rarr;</span> Your data stays in your cloud</h3>
+          <p>
+            Everything deploys into your own AWS, Azure, or GCP account, inside
+            your network boundary. Your data isn&rsquo;t sent anywhere it
+            shouldn&rsquo;t be, and it&rsquo;s never used to train a model.
+          </p>
+        </article>
 
-	.link-card-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-		gap: 1rem;
-		padding: 0;
-	}
+        <article class="gov-item">
+          <h3><span class="gov-mark" aria-hidden="true">&rarr;</span> Access control at the retrieval layer</h3>
+          <p>
+            Per-user permissions are enforced before anything reaches a model,
+            not bolted on afterward. People only see answers built from
+            documents they&rsquo;re already allowed to read.
+          </p>
+        </article>
 
-	.link-card-grid > * {
-		transition: transform 0.3s ease;
-	}
+        <article class="gov-item">
+          <h3><span class="gov-mark" aria-hidden="true">&rarr;</span> Auditable by design</h3>
+          <p>
+            Every answer cites the sources it came from, and key decisions are
+            logged. When someone asks why the system said what it said, you can
+            actually show them.
+          </p>
+        </article>
 
-	.link-card-grid > *:hover {
-		transform: scale(1.10);
-	}
+        <article class="gov-item">
+          <h3><span class="gov-mark" aria-hidden="true">&rarr;</span> Model-neutral</h3>
+          <p>
+            Claude, OpenAI, Azure OpenAI, or open-weight models on your own
+            hardware &mdash; chosen to fit your risk, latency, and cost profile.
+            You&rsquo;re never locked to one vendor.
+          </p>
+        </article>
 
-    .logo-section {
-        display: flex;
-        justify-content: center;
-    }
+        <article class="gov-item">
+          <h3><span class="gov-mark" aria-hidden="true">&rarr;</span> Inside your process, not around it</h3>
+          <p>
+            I work under your NDA and MSA, through your security review, and
+            alongside your InfoSec and platform teams &mdash; not in a shadow
+            project that has to be re-approved later.
+          </p>
+        </article>
 
-    .github-logo {
-        margin-right: inherit;
-    }
+        <article class="gov-item">
+          <h3><span class="gov-mark" aria-hidden="true">&rarr;</span> Evals and monitoring from day one</h3>
+          <p>
+            Quality is measured against a real evaluation set before anything
+            ships, and watched for drift after. &ldquo;It feels better&rdquo;
+            never gets to decide a release.
+          </p>
+        </article>
+      </div>
+    </section>
 
-    .linkedin-logo {
-        margin-left: inherit;
-    }
-</style>
+    <!-- ================= SELECTED WORK ================= -->
+    <section class="section wrap" id="work" aria-labelledby="work-label">
+      <p class="section-label" id="work-label">Selected work</p>
+
+      <div class="work-list">
+        <!-- Olotalk / Olochat AI — open by default -->
+        <details class="work-item" open>
+          <summary class="work-summary">
+            <span class="work-name">
+              Olotalk
+              <span class="work-toggle mono" aria-hidden="true"><span class="plus">+</span><span class="minus">–</span></span>
+            </span>
+            <span class="work-meta">2025–26 · RAG platform</span>
+          </summary>
+          <div class="work-body">
+            <ul class="tags">
+              <li>RAG</li>
+              <li>Qdrant</li>
+              <li>Claude Haiku</li>
+              <li>Next.js</li>
+              <li>Python</li>
+              <li>Kubernetes</li>
+            </ul>
+            <p>
+              <strong>Shipped a production RAG support agent for Canadian
+              SMBs.</strong> A live-chat assistant that answers from a
+              company&rsquo;s own site content: DOM-aware chunking and
+              Claude-based enrichment over Qdrant, PostgreSQL, Redis, and
+              ClickHouse, deployed on Kubernetes with zero-downtime rollouts.
+            </p>
+
+            <!-- Olotalk architecture diagram: inline SVG, styled with presentation
+                 attributes + literal token hex (no nested <style> for Astro to scope) -->
+            <figure style="margin: 28px 0; text-align: left;">
+              <svg viewBox="0 0 360 422" role="img" aria-label="Olotalk RAG pipeline. Ingest: the company's own website is chunked, enriched, and embedded into Qdrant. Serve: a visitor question retrieves relevant chunks and Claude Haiku writes a grounded reply, running on Kubernetes." style="width: 100%; max-width: 360px; height: auto; display: block;">
+                <defs>
+                  <marker id="olo-ah" viewBox="0 0 8 8" markerWidth="7" markerHeight="7" refX="6.2" refY="4" orient="auto"><path d="M1,1 L6,4 L1,7" fill="none" stroke="#aab0b8" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></marker>
+                </defs>
+                <text x="30" y="16" font-family="'IBM Plex Mono',ui-monospace,monospace" font-size="10" fill="#5b6470" letter-spacing="0.08em">INGEST · once per site</text>
+                <rect x="30" y="26" width="300" height="48" rx="8" fill="#ffffff" stroke="#e6e8eb" stroke-width="1"/>
+                <text x="180" y="48" text-anchor="middle" font-family="'Instrument Sans',system-ui,sans-serif" font-size="14" font-weight="600" fill="#101418">Company&#39;s own website</text>
+                <text x="180" y="64" text-anchor="middle" font-family="'Instrument Sans',system-ui,sans-serif" font-size="10.5" fill="#5b6470">the content it will answer from</text>
+                <line x1="180" y1="74" x2="180" y2="94" stroke="#aab0b8" stroke-width="1.4" marker-end="url(#olo-ah)"/>
+                <rect x="30" y="96" width="300" height="48" rx="8" fill="#ffffff" stroke="#2547f4" stroke-width="1.6"/>
+                <text x="180" y="118" text-anchor="middle" font-family="'Instrument Sans',system-ui,sans-serif" font-size="14" font-weight="600" fill="#2547f4">Chunk, enrich, embed &#8594; Qdrant</text>
+                <text x="180" y="134" text-anchor="middle" font-family="'Instrument Sans',system-ui,sans-serif" font-size="10.5" fill="#5b6470">DOM-aware chunking + Claude enrichment</text>
+                <line x1="30" y1="162" x2="330" y2="162" stroke="#e6e8eb" stroke-width="1"/>
+                <text x="30" y="180" font-family="'IBM Plex Mono',ui-monospace,monospace" font-size="10" fill="#5b6470" letter-spacing="0.08em">SERVE · live chat, every visitor</text>
+                <rect x="30" y="190" width="300" height="48" rx="8" fill="#ffffff" stroke="#e6e8eb" stroke-width="1"/>
+                <text x="180" y="212" text-anchor="middle" font-family="'Instrument Sans',system-ui,sans-serif" font-size="14" font-weight="600" fill="#101418">Visitor question</text>
+                <text x="180" y="228" text-anchor="middle" font-family="'Instrument Sans',system-ui,sans-serif" font-size="10.5" fill="#5b6470">in the site&#39;s live chat widget</text>
+                <line x1="180" y1="238" x2="180" y2="258" stroke="#aab0b8" stroke-width="1.4" marker-end="url(#olo-ah)"/>
+                <rect x="30" y="260" width="300" height="48" rx="8" fill="#ffffff" stroke="#e6e8eb" stroke-width="1"/>
+                <text x="180" y="282" text-anchor="middle" font-family="'Instrument Sans',system-ui,sans-serif" font-size="14" font-weight="600" fill="#101418">Retrieve &#8594; Claude Haiku</text>
+                <text x="180" y="298" text-anchor="middle" font-family="'Instrument Sans',system-ui,sans-serif" font-size="10.5" fill="#5b6470">pull relevant chunks, then answer</text>
+                <line x1="180" y1="308" x2="180" y2="328" stroke="#aab0b8" stroke-width="1.4" marker-end="url(#olo-ah)"/>
+                <rect x="30" y="330" width="300" height="48" rx="8" fill="#ffffff" stroke="#2547f4" stroke-width="1.6"/>
+                <text x="180" y="352" text-anchor="middle" font-family="'Instrument Sans',system-ui,sans-serif" font-size="14" font-weight="600" fill="#2547f4">Grounded reply</text>
+                <text x="180" y="368" text-anchor="middle" font-family="'Instrument Sans',system-ui,sans-serif" font-size="10.5" fill="#5b6470">answers only from the company&#39;s content</text>
+                <text x="180" y="402" text-anchor="middle" font-family="'IBM Plex Mono',ui-monospace,monospace" font-size="10.5" fill="#5b6470" letter-spacing="0.02em">runs on Kubernetes · zero-downtime rollouts</text>
+              </svg>
+              <figcaption style="font-family: var(--mono); font-size: 12px; color: var(--gray); line-height: 1.55; margin-top: 14px; max-width: 360px;">Olotalk&rsquo;s RAG pipeline: a company&rsquo;s own content, chunked and enriched into Qdrant, then answered live by Claude Haiku &mdash; grounded in their content, not the open web.</figcaption>
+            </figure>
+
+            <a class="case-link" href="https://olotalk.com">Visit olotalk.com</a>
+          </div>
+        </details>
+
+        <!-- BMO — cloud-migration diff tool -->
+        <details class="work-item">
+          <summary class="work-summary">
+            <span class="work-name">
+              Cloud Migration Diff
+              <span class="work-toggle mono" aria-hidden="true"><span class="plus">+</span><span class="minus">–</span></span>
+            </span>
+            <span class="work-meta">2024–25 · BMO · Cloud tooling</span>
+          </summary>
+          <div class="work-body">
+            <ul class="tags">
+              <li>Next.js</li>
+              <li>AWS Lambda</li>
+              <li>IAM / STS</li>
+              <li>DynamoDB</li>
+              <li>S3</li>
+            </ul>
+            <p>
+              <strong>Made cloud-migration config reviews readable.</strong> A
+              Next.js and Lambda tool that parses and color-codes the
+              differences between on-prem and cloud JSON configs, with secure
+              access boundaries via AWS IAM roles, policies, and STS.
+            </p>
+          </div>
+        </details>
+
+        <!-- RBC — risk-exploration visualization -->
+        <details class="work-item">
+          <summary class="work-summary">
+            <span class="work-name">
+              Risk Explorer
+              <span class="work-toggle mono" aria-hidden="true"><span class="plus">+</span><span class="minus">–</span></span>
+            </span>
+            <span class="work-meta">2022–24 · RBC · Data viz + LLM</span>
+          </summary>
+          <div class="work-body">
+            <ul class="tags">
+              <li>React</li>
+              <li>Redux</li>
+              <li>Python / Django</li>
+              <li>Graph algorithms</li>
+              <li>LLM tooling</li>
+            </ul>
+            <p>
+              <strong>Let risk analysts trace relationships across their
+              data.</strong> An interactive tool of draggable, interconnected
+              charts wired together with Dijkstra and topological sorting, plus
+              exploratory LLM tooling for data insights.
+            </p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- ================= EXPERIENCE ================= -->
+    <section class="section wrap" id="experience" aria-labelledby="exp-label">
+      <p class="section-label" id="exp-label">Experience</p>
+
+      <p class="exp-intro">
+        Nearly 20 years building production systems, from telecom and banking
+        platforms to AI. Trilingual (English, French, German), based in Toronto.
+        Recent roles:
+      </p>
+
+      <div class="exp-row">
+        <div class="exp-date">2009 – Now</div>
+        <div>
+          <p class="exp-role">Principal Developer &amp; AI Consultant</p>
+          <p class="exp-company mono">Independent practice · Toronto</p>
+          <p class="exp-detail">
+            Full-stack and AI/LLM delivery for fintech, media, and
+            public-sector clients, end to end.
+          </p>
+        </div>
+      </div>
+
+      <div class="exp-row">
+        <div class="exp-date">2025 – 2026</div>
+        <div>
+          <p class="exp-role">Lead Developer</p>
+          <p class="exp-company mono">Olochat AI (Olotalk)</p>
+          <p class="exp-detail">
+            Architected and shipped a production RAG chat and support platform
+            end to end.
+          </p>
+        </div>
+      </div>
+
+      <div class="exp-row">
+        <div class="exp-date">2024 – 2025</div>
+        <div>
+          <p class="exp-role">Senior Full-Stack Developer</p>
+          <p class="exp-company mono">BMO · Cloud Center of Excellence</p>
+          <p class="exp-detail">
+            Built cloud-migration tooling on Next.js, Node.js, and AWS Lambda.
+          </p>
+        </div>
+      </div>
+
+      <div class="exp-row">
+        <div class="exp-date">2022 – 2024</div>
+        <div>
+          <p class="exp-role">Senior Full-Stack Developer</p>
+          <p class="exp-company mono">RBC · Enterprise Risk Management</p>
+          <p class="exp-detail">
+            Built an interactive risk-visualization tool with graph algorithms
+            and LLM-assisted insights.
+          </p>
+        </div>
+      </div>
+
+      <div class="exp-row">
+        <div class="exp-date">2018 – 2020</div>
+        <div>
+          <p class="exp-role">Senior Full-Stack Developer</p>
+          <p class="exp-company mono">MobileLIVE</p>
+          <p class="exp-detail">
+            Led fido.ca&rsquo;s AngularJS to Angular 7 migration; built
+            CIBC/Simplii money-transfer features.
+          </p>
+        </div>
+      </div>
+
+      <div class="exp-row">
+        <div class="exp-date">2018</div>
+        <div>
+          <p class="exp-role">Senior Frontend Developer</p>
+          <p class="exp-company mono">Bell Media</p>
+          <p class="exp-detail">
+            Built features for the Vidi video player used across 25 Bell brands.
+          </p>
+        </div>
+      </div>
+
+      <!-- Full resume — served from public/resume.pdf -->
+      <a class="btn" href="/resume.pdf">Download full resume (PDF)</a>
+    </section>
+
+    <!-- ================= WRITING ================= -->
+    <section class="section wrap" id="writing" aria-labelledby="writing-label">
+      <p class="section-label" id="writing-label">Writing</p>
+
+      <!-- Posts — live at /writing/<slug>; the section index is /writing -->
+      <a class="post" href="/writing/demo-to-production">
+        <span class="post-title">The gap between an AI demo and production</span>
+        <span class="post-date">2026 · 07</span>
+      </a>
+
+      <a class="post" href="/writing/rag-in-production">
+        <span class="post-title">RAG in production: what the demos don&rsquo;t tell you</span>
+        <span class="post-date">2026 · 02</span>
+      </a>
+
+      <p class="writing-note">
+        New posts land here first. No newsletter, no popups. Just a page that
+        updates.
+      </p>
+    </section>
+
+    <!-- ================= FOOTER / CONTACT ================= -->
+    <footer class="footer section wrap" id="contact" aria-labelledby="cta">
+      <h2 class="cta" id="cta">
+        Ready to put generative AI to work in your company?
+        <a class="cta-email" href="mailto:gustave@nganso.com">gustave@nganso.com</a>
+      </h2>
+
+      <form id="contact-form" class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+        <!-- Web3Forms public access key (safe to commit; it ships in the page HTML by design) -->
+        <input type="hidden" name="access_key" value="b877a6e5-9225-48f5-ab39-f903494e5a81" />
+        <input type="hidden" name="subject" value="New message from nganso.com" />
+        <input type="hidden" name="from_name" value="nganso.com" />
+
+        <div class="field">
+          <label for="cf-name">Name</label>
+          <input id="cf-name" type="text" name="name" autocomplete="name" required />
+        </div>
+
+        <div class="field">
+          <label for="cf-email">Email</label>
+          <input id="cf-email" type="email" name="email" autocomplete="email" required />
+        </div>
+
+        <div class="field">
+          <label for="cf-message">Message</label>
+          <textarea id="cf-message" name="message" rows="5" placeholder="What do you want to build?" required></textarea>
+        </div>
+
+        <!-- Honeypot (leave empty): hidden from people, filled by bots -->
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+        <button class="btn-submit" type="submit">Send message</button>
+        <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+      </form>
+
+      <div class="fine-print">
+        <span>© 2026 Gustave Nganso · I&rsquo;m on it.</span>
+        <span class="links">
+          <!-- Profile links -->
+          <a href="https://github.com/etobicoke" rel="me">GitHub</a>
+          <a href="https://www.linkedin.com/in/gnganso-javascript-developer-engineer-architect/" rel="me">LinkedIn</a>
+        </span>
+      </div>
+    </footer>
+
+  </main>
+
+  <!--
+    Progressive enhancement: submit the contact form via fetch and show an
+    inline result, so the visitor stays on the page. If JS is off, the plain
+    <form> POST above still works (Web3Forms shows its own success page).
+  -->
+  <script is:inline>
+    (function () {
+      var form = document.getElementById('contact-form');
+      if (!form) return;
+      var statusEl = document.getElementById('form-status');
+      var btn = form.querySelector('button[type="submit"]');
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var label = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
+        statusEl.textContent = '';
+        statusEl.className = 'form-status';
+
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(Object.fromEntries(new FormData(form)))
+        })
+          .then(function (res) { return res.json(); })
+          .then(function (data) {
+            if (data.success) {
+              form.reset();
+              statusEl.textContent = 'Thanks, I’ll be in touch.';
+              statusEl.classList.add('is-ok');
+            } else {
+              statusEl.textContent = data.message || 'Something went wrong. Please email me directly.';
+              statusEl.classList.add('is-err');
+            }
+          })
+          .catch(function () {
+            statusEl.textContent = 'Network error. Please email gustave@nganso.com.';
+            statusEl.classList.add('is-err');
+          })
+          .finally(function () {
+            btn.disabled = false;
+            btn.textContent = label;
+          });
+      });
+    })();
+  </script>
+
+  <!-- Scroll-reveal motion layer (no dependencies) -->
+  <script is:inline>
+    (function () {
+      var SEL = [
+        '.hero > *',
+        '#services .section-label', '#services .services-intro', '.service', '.engagement',
+        '#governance .section-label', '.gov-intro', '.gov-item',
+        '#work .section-label', '.work-item',
+        '#experience .section-label', '.exp-intro', '.exp-row', '#experience .btn',
+        '#writing .section-label', '.post', '.writing-note',
+        '#contact .cta', '.contact-form', '#contact .fine-print'
+      ].join(',');
+      var els = Array.prototype.slice.call(document.querySelectorAll(SEL));
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (reduce || !('IntersectionObserver' in window)) {
+        els.forEach(function (el) { el.classList.add('is-visible'); });
+        return;
+      }
+
+      var io = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+
+      els.forEach(function (el) { io.observe(el); });
+    })();
+  </script>
+<OlotalkSearch />
+</body>
+</html>

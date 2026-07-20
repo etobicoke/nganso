@@ -1,26 +1,41 @@
-# Welcome to my Personal Website
+# nganso.com — personal site
 
-## 🚀 Project Structure
+Gustave Nganso's personal site: a one-page positioning site (generative-AI
+consultant, enterprise focus) plus a small writing section. Built with
+[Astro](https://astro.build) (static output).
 
-Inside the project, you'll see the following folders and files:
+## Documentation
+
+**See [`docs/site-notes.md`](docs/site-notes.md)** for the positioning decisions,
+copy rationale, design tokens, how the inline-SVG diagrams/charts are built, the
+change log, and open TODOs. Read it before rewriting copy or adding visuals.
+
+## Project structure
 
 ```
-/
-├── public/
-│   ├── assets/
-│       └── images
-│        └── styles
-│        └── videos
+├── docs/
+│   └── site-notes.md          # working documentation (start here)
+├── public/                     # static assets (resume.pdf, images, videos)
 ├── src/
-│   ├── components/
-│   │   └── Card.astro
 │   ├── layouts/
-│   │   └── Layout.astro
+│   │   ├── Layout.astro         # old landing page layout (coming-soon)
+│   │   └── WritingLayout.astro  # blog post layout
 │   └── pages/
-│       └── index.astro
+│       ├── index.astro          # homepage (self-contained head + styles)
+│       ├── coming-soon.astro    # old landing page, kept + unlinked
+│       └── writing/
+│           ├── index.astro                 # /writing index (auto-lists posts)
+│           ├── demo-to-production.md        # post
+│           └── rag-in-production.md         # post (diagram + charts)
 └── package.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Astro serves each `.astro`/`.md` file in `src/pages/` as a route based on its
+file name. Static assets go in `public/`.
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Develop
+
+```bash
+npm run dev      # local dev server
+npm run build    # static build → dist/
+```
