@@ -51,4 +51,4 @@ I'll be straight about the mismatch. If you want a fixed quote against a spec th
 
 You get someone in the room and in the code, on the hook for whether the thing runs, instead of a recommendation you then have to go make real yourself. That's the pitch. Plenty of companies are stuck at *"we should be using AI,"* and getting from there to something real in production is the hard part.
 
-That's the part I do. [Tell me what you're stuck on.](mailto:gustave@nganso.com)
+That's the part I do. [Tell me what you're stuck on.](/#contact)

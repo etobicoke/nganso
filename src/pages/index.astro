@@ -25,7 +25,7 @@ import OlotalkSearch from "../components/OlotalkSearch.astro";
   <script is:inline>document.documentElement.classList.add('js');</script>
 
   <title>Gustave Nganso · Generative AI in your company. I'm on it.</title>
-  <meta name="description" content="Gustave Nganso — Toronto-based generative AI (GenAI) consultant. Nearly 20 years shipping production systems; I help enterprises put generative AI to work — RAG, LLM assistants, and automation that actually runs." />
+  <meta name="description" content="Gustave Nganso — Toronto-based generative AI (GenAI) consultant and founder of Olochat AI Inc. Nearly 20 years shipping production systems; I help enterprises put generative AI to work — RAG, LLM assistants, and automation that actually runs." />
 
   <!-- Fonts: Instrument Sans (display + body), IBM Plex Mono (metadata). No external JS. -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -219,6 +219,8 @@ import OlotalkSearch from "../components/OlotalkSearch.astro";
     }
     .hero-links a:hover { color: var(--accent); border-color: var(--accent); }
     .hero-links a::before { content: "↗ "; color: var(--gray); }
+    /* Same-page anchors point down the page, not off-site */
+    .hero-links a.is-anchor::before { content: "↓ "; }
 
     /* ---------- Services (1px-gap grid via background trick) ---------- */
     .services-grid {
@@ -251,6 +253,18 @@ import OlotalkSearch from "../components/OlotalkSearch.astro";
       font-size: 15.5px;
       line-height: 1.55;
     }
+    /* Inline links in body copy: accent, with an underline that lights up */
+    .service p a,
+    .engagement p a,
+    .exp-company a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid var(--hairline);
+      transition: border-color 0.18s ease;
+    }
+    .service p a:hover,
+    .engagement p a:hover,
+    .exp-company a:hover { border-color: var(--accent); }
 
     /* Embedded framing + engagement models */
     .services-intro,
@@ -412,6 +426,7 @@ import OlotalkSearch from "../components/OlotalkSearch.astro";
     }
     .case-link:hover { border-color: var(--accent); }
     .case-link::after { content: " →"; }
+    .case-links { display: flex; flex-wrap: wrap; gap: 10px 26px; }
 
     /* ---------- Experience ---------- */
     .exp-row {
@@ -501,12 +516,6 @@ import OlotalkSearch from "../components/OlotalkSearch.astro";
       line-height: 1.06;
       letter-spacing: -0.03em;
       max-width: 720px;
-    }
-    .cta-email {
-      color: var(--accent);
-      text-decoration: underline;
-      text-underline-offset: 5px;
-      text-decoration-thickness: 2px;
     }
     .fine-print {
       display: flex;
@@ -726,7 +735,7 @@ import OlotalkSearch from "../components/OlotalkSearch.astro";
     <section class="hero wrap" aria-label="Introduction">
       <p class="kicker mono">
         <span class="dot" aria-hidden="true"></span>
-        Toronto, Canada · taking on new clients
+        Toronto, Canada · Founder, Olochat AI Inc. · taking on new clients
       </p>
 
       <h1 class="headline">
@@ -744,7 +753,9 @@ import OlotalkSearch from "../components/OlotalkSearch.astro";
         <!-- Profile links -->
         <a href="https://github.com/etobicoke" rel="me">GitHub</a>
         <a href="https://www.linkedin.com/in/gnganso-javascript-developer-engineer-architect/" rel="me">LinkedIn</a>
-        <a href="mailto:gustave@nganso.com">gustave@nganso.com</a>
+        <a href="https://olochat.ca">olochat.ca</a>
+        <!-- Contact is the form at the bottom of this page, not an email address -->
+        <a class="is-anchor" href="#contact">Get in touch</a>
       </nav>
 
       <!-- Trust strip: named enterprise clients as an at-a-glance credibility bar -->
@@ -798,7 +809,9 @@ import OlotalkSearch from "../components/OlotalkSearch.astro";
           <p>
             I don&rsquo;t want to be a dependency. I document what I build, walk
             your team through it, and hand over something they can run and
-            change on their own.
+            change on their own &mdash; with structured AI training through
+            <a href="https://olochat.ca">Olochat AI</a> when a whole team needs
+            to come up to speed.
           </p>
         </article>
       </div>
@@ -815,9 +828,10 @@ import OlotalkSearch from "../components/OlotalkSearch.astro";
         <div class="engagement">
           <p class="engagement-kicker mono">Work with my team</p>
           <p>
-            For bigger jobs, I bring in other vetted <strong>senior
-            engineers</strong> who work the same embedded way. You get extra
-            capacity fast, and I stay accountable for what ships.
+            For bigger jobs, I bring in my team at <strong>Olochat AI
+            Inc.</strong> &mdash; vetted <strong>senior engineers</strong> who
+            work the same embedded way. You get extra capacity fast, and I stay
+            accountable for what ships.
           </p>
         </div>
       </div>
@@ -903,7 +917,7 @@ import OlotalkSearch from "../components/OlotalkSearch.astro";
               Olotalk
               <span class="work-toggle mono" aria-hidden="true"><span class="plus">+</span><span class="minus">–</span></span>
             </span>
-            <span class="work-meta">2025–26 · RAG platform</span>
+            <span class="work-meta">2025–Now · Olochat AI · RAG platform</span>
           </summary>
           <div class="work-body">
             <ul class="tags">
@@ -916,7 +930,8 @@ import OlotalkSearch from "../components/OlotalkSearch.astro";
             </ul>
             <p>
               <strong>Shipped a production RAG support agent for Canadian
-              SMBs.</strong> A live-chat assistant that answers from a
+              SMBs</strong> &mdash; the flagship product of my company, Olochat
+              AI Inc. A live-chat assistant that answers from a
               company&rsquo;s own site content: DOM-aware chunking and
               Claude-based enrichment over Qdrant, PostgreSQL, Redis, and
               ClickHouse, deployed on Kubernetes with zero-downtime rollouts.
@@ -955,7 +970,10 @@ import OlotalkSearch from "../components/OlotalkSearch.astro";
               <figcaption style="font-family: var(--mono); font-size: 12px; color: var(--gray); line-height: 1.55; margin-top: 14px; max-width: 360px;">Olotalk&rsquo;s RAG pipeline: a company&rsquo;s own content, chunked and enriched into Qdrant, then answered live by Claude Haiku &mdash; grounded in their content, not the open web.</figcaption>
             </figure>
 
-            <a class="case-link" href="https://olotalk.com">Visit olotalk.com</a>
+            <div class="case-links">
+              <a class="case-link" href="https://olotalk.com">Visit olotalk.com</a>
+              <a class="case-link" href="https://olochat.ca">Olochat AI Inc. · olochat.ca</a>
+            </div>
           </div>
         </details>
 
@@ -1024,6 +1042,19 @@ import OlotalkSearch from "../components/OlotalkSearch.astro";
       </p>
 
       <div class="exp-row">
+        <div class="exp-date">2025 – Now</div>
+        <div>
+          <p class="exp-role">Founder &amp; Principal</p>
+          <p class="exp-company mono"><a href="https://olochat.ca">Olochat AI Inc. · olochat.ca</a></p>
+          <p class="exp-detail">
+            AI training for teams, and AI products of our own &mdash; including
+            Olotalk, a production RAG chat and support platform I architected
+            and shipped end to end.
+          </p>
+        </div>
+      </div>
+
+      <div class="exp-row">
         <div class="exp-date">2009 – Now</div>
         <div>
           <p class="exp-role">Principal Developer &amp; AI Consultant</p>
@@ -1031,18 +1062,6 @@ import OlotalkSearch from "../components/OlotalkSearch.astro";
           <p class="exp-detail">
             Full-stack and AI/LLM delivery for fintech, media, and
             public-sector clients, end to end.
-          </p>
-        </div>
-      </div>
-
-      <div class="exp-row">
-        <div class="exp-date">2025 – 2026</div>
-        <div>
-          <p class="exp-role">Lead Developer</p>
-          <p class="exp-company mono">Olochat AI (Olotalk)</p>
-          <p class="exp-detail">
-            Architected and shipped a production RAG chat and support platform
-            end to end.
           </p>
         </div>
       </div>
@@ -1122,7 +1141,7 @@ import OlotalkSearch from "../components/OlotalkSearch.astro";
     <footer class="footer section wrap" id="contact" aria-labelledby="cta">
       <h2 class="cta" id="cta">
         Ready to put generative AI to work in your company?
-        <a class="cta-email" href="mailto:gustave@nganso.com">gustave@nganso.com</a>
+        <span class="accent">Tell me what you&rsquo;re building.</span>
       </h2>
 
       <form id="contact-form" class="contact-form" action="https://api.web3forms.com/submit" method="POST">
@@ -1154,11 +1173,12 @@ import OlotalkSearch from "../components/OlotalkSearch.astro";
       </form>
 
       <div class="fine-print">
-        <span>© 2026 Gustave Nganso · I&rsquo;m on it.</span>
+        <span>© 2026 Gustave Nganso · Olochat AI Inc. · I&rsquo;m on it.</span>
         <span class="links">
           <!-- Profile links -->
           <a href="https://github.com/etobicoke" rel="me">GitHub</a>
           <a href="https://www.linkedin.com/in/gnganso-javascript-developer-engineer-architect/" rel="me">LinkedIn</a>
+          <a href="https://olochat.ca">olochat.ca</a>
         </span>
       </div>
     </footer>
@@ -1197,12 +1217,12 @@ import OlotalkSearch from "../components/OlotalkSearch.astro";
               statusEl.textContent = 'Thanks, I’ll be in touch.';
               statusEl.classList.add('is-ok');
             } else {
-              statusEl.textContent = data.message || 'Something went wrong. Please email me directly.';
+              statusEl.textContent = data.message || 'Something went wrong. Please try again.';
               statusEl.classList.add('is-err');
             }
           })
           .catch(function () {
-            statusEl.textContent = 'Network error. Please email gustave@nganso.com.';
+            statusEl.textContent = 'Network error. Please try again in a moment.';
             statusEl.classList.add('is-err');
           })
           .finally(function () {

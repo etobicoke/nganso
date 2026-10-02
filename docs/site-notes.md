@@ -2,7 +2,7 @@
 
 Working documentation for Gustave Nganso's personal site: what it is, the
 positioning decisions behind the copy, how the visuals are built, and what's
-still open. Last substantive update: **2026-07-09**.
+still open. Last substantive update: **2026-08-04**.
 
 ---
 
@@ -156,7 +156,37 @@ loaded — the live site renders in Instrument Sans / IBM Plex Mono.
 
 ---
 
-## 6. Change log — 2026-07-09 session
+## 6. Change log — 2026-08-04 session
+
+1. **No email address anywhere on the site.** `gustave@nganso.com` was removed
+   from all four files it appeared in (homepage hero + closing CTA + the JS
+   error fallback, `WritingLayout.astro` footer, and the CTA at the end of both
+   blog posts). Every one of those now points at the **`#contact` form** — the
+   Web3Forms form is the single contact path. If an address is ever added back,
+   add it in one place, not six. The homepage hero's "Get in touch" link uses
+   `.hero-links a.is-anchor`, which swaps the `↗` prefix for `↓` since it's a
+   same-page jump, and the closing CTA line is now a plain `<span class="accent">`
+   (the `.cta-email` rule was deleted with its last user).
+2. **Olochat AI Inc. (olochat.ca) is now the company Gustave runs**, and the
+   site says so: hero kicker ("Founder, Olochat AI Inc."), `olochat.ca` in the
+   hero links and footer, the "work with my team" engagement model is his team
+   at Olochat AI, training in service 03 runs through Olochat AI, the Olotalk
+   case study calls it Olochat's flagship product, and the meta description
+   names him as its founder.
+3. **Experience reordered.** Olochat AI Inc. is now the first row —
+   **2025 – Now, Founder & Principal** (was "2025 – 2026 · Lead Developer ·
+   Olochat AI (Olotalk)", which read as a finished contract) — followed by the
+   2009 – Now independent practice. Both are current; the company leads.
+   Olochat's blurb states what it does: **AI training for teams, and AI products
+   of its own**, Olotalk among them.
+
+Framing note: the site still sells **Gustave's consulting** — he is the product,
+Olochat is the company behind him. It was deliberately not rewritten into a
+company site (no "we", no product-marketing voice).
+
+---
+
+## 6b. Change log — 2026-07-09 session
 
 1. **Dropped "forward deployed"** everywhere → "embedded." Rewrote + renamed the
    post `forward-deployed-consultant.md` → `demo-to-production.md` ("The gap

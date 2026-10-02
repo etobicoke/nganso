@@ -146,4 +146,4 @@ Keep it boring at the start. Hybrid retrieval and a re-ranker will beat an elabo
 
 None of this shows up in the demo, and all of it is the job. The distance between a RAG demo and a RAG system people trust with real work is the whole engagement, and it's the part worth paying for.
 
-If you've got a demo that wowed everyone and then stalled, [that's the gap I close.](mailto:gustave@nganso.com)
+If you've got a demo that wowed everyone and then stalled, [that's the gap I close.](/#contact)
