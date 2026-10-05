@@ -1,0 +1,14 @@
+
+
+# type(scope): what changed, imperative, ≤ 60 chars
+#
+# Why it changed, if not obvious. Wrap at 72 columns.
+#
+# Types:  feat | fix | content | style | refactor | chore | deploy | docs | demo
+# Scopes: home | writing | contact | search | seo | resume | styles | deps | dev | deploy
+#
+# Rules: imperative ("add", not "added"), no TODO in the subject,
+#        one logical change per commit. Full guide: CLAUDE.md
+#
+# e.g. feat(contact): route all contact through the form
+#      content(writing): add post on RAG evals
