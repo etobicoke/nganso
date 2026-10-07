@@ -25,7 +25,7 @@ Why it changed, if not obvious. Wrap at 72 columns.
 | `style` | visual or CSS changes only |
 | `refactor` | code restructure with no behaviour change |
 | `chore` | dependencies, tooling, config |
-| `deploy` | deploy scripts, nginx, hosting |
+| `deploy` | deploy scripts, hosting |
 | `docs` | `docs/`, README, this file |
 | `demo` | Olotalk integration experiments |
 

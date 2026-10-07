@@ -234,5 +234,6 @@ npm run build    # static build → dist/
 ```
 
 Deploy tooling lives in `deploy.sh` / `deploy/` with `.deploy.env.example` as the
-config template. Production hosting notes are in the maintainer's separate infra
-memory (Linode box), not this repo.
+config template. `./deploy.sh` builds and rsyncs `dist/` to the shared Linode,
+where a Caddy container serves it; `deploy/README.md` describes the full
+production setup. First deployed this way on 2026-10-06.

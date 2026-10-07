@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 #
 # Build the site and deploy the static dist/ to the Linode over rsync + SSH.
+# On the server, the `sites-nganso-1` Caddy container serves DEPLOY_PATH
+# read-only, so the new files are live as soon as rsync finishes.
 #
 #   ./deploy.sh
 #
@@ -16,8 +18,8 @@ if [ -f .deploy.env ]; then
 fi
 
 DEPLOY_HOST="${DEPLOY_HOST:-}"
-DEPLOY_USER="${DEPLOY_USER:-root}"
-DEPLOY_PATH="${DEPLOY_PATH:-/var/www/nganso}"
+DEPLOY_USER="${DEPLOY_USER:-deploy}"
+DEPLOY_PATH="${DEPLOY_PATH:-/opt/sites/nganso/dist}"
 DEPLOY_PORT="${DEPLOY_PORT:-22}"
 SSH_KEY="${SSH_KEY:-}"
 
@@ -34,6 +36,9 @@ fi
 
 echo "→ Building production bundle…"
 npm run build
+
+# macOS litter in public/ would otherwise be served publicly.
+find dist -name .DS_Store -delete
 
 echo "→ Syncing dist/ → ${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH}"
 rsync -avz --delete \
