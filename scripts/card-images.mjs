@@ -50,7 +50,7 @@ const renders = [
     file: "qr-lockscreen.png", w: 1179, h: 2556,
     html: page(1179, 2556, `<div style="height:990px"></div>
 <div style="font-size:92px;font-weight:700;letter-spacing:-0.03em;line-height:1">Gustave Nganso</div>
-<div class="mono" style="font-size:38px;margin-top:22px">Generative AI consultant · Olochat AI</div>
+<div class="mono" style="font-size:38px;margin-top:22px">Principal AI developer · Olochat AI</div>
 <div class="qr" style="width:800px;margin-top:56px">${qrSite}</div>
 <div class="mono" style="font-size:38px;margin-top:18px">Scan to save my contact</div>`),
   },
