@@ -6,7 +6,8 @@
 //     string): a big QR code with a Website | LinkedIn switch, and the screen
 //     is kept awake while it's showing.
 //   • Visitor (someone scanned the website QR, which adds ?utm_source=qr):
-//     the QR is hidden and they get Save contact, the site, and LinkedIn.
+//     the QR is hidden and they get Save contact, the site, LinkedIn and
+//     the resume.
 // Without JS both QR codes stay hidden except the website one, and the
 // buttons are always shown.
 //
@@ -242,6 +243,7 @@ const qrLinkedIn = await QRCode.toString(LINKEDIN, qrOptions);
       <a class="btn btn-primary" href="/gustave-nganso.vcf" data-save-contact>Save contact</a>
       <a class="btn" href="/">Visit nganso.com</a>
       <a class="btn" href={LINKEDIN}>Connect on LinkedIn</a>
+      <a class="btn" href="/resume.pdf" data-resume>Download resume (PDF)</a>
       <p class="company mono"><a href="https://olochat.ca">olochat.ca</a></p>
     </nav>
 
@@ -287,6 +289,14 @@ const qrLinkedIn = await QRCode.toString(LINKEDIN, qrOptions);
       if (save) {
         save.addEventListener('click', function () {
           if (typeof gtag === 'function') gtag('event', 'save_contact');
+        });
+      }
+
+      // Count resume downloads in Analytics
+      var resume = document.querySelector('[data-resume]');
+      if (resume) {
+        resume.addEventListener('click', function () {
+          if (typeof gtag === 'function') gtag('event', 'download_resume');
         });
       }
     })();

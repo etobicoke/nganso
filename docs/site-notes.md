@@ -216,12 +216,17 @@ picked before first paint:
   screen): a big QR code with a Website | LinkedIn switch; the Screen Wake
   Lock API keeps the screen on while it shows.
 - **Visitor** (arrived by scanning, so the URL has `?utm_source=qr`): the QR
-  is hidden; they get **Save contact**, the site, LinkedIn and olochat.ca.
+  is hidden; they get **Save contact**, the site, LinkedIn, the resume and
+  olochat.ca.
 
 Details worth knowing:
 - The website QR encodes `https://nganso.com/card/?utm_source=qr&utm_medium=card`,
   so Google Analytics attributes scans to source `qr`. Clicks on Save contact
-  fire a `save_contact` event.
+  fire a `save_contact` event; clicks on Download resume fire
+  `download_resume`.
+- **Download resume** links the same `public/resume.pdf` as the homepage
+  button. No `download` attribute on purpose: phones open the PDF in their
+  viewer, where it can be read, shared or saved.
 - **The resume PDF is a public version**, kept separate from job
   applications: titled "Principal AI Developer · Founder, Olochat AI Inc." to
   match the card, and with **no phone or email**. Its contact line points at
