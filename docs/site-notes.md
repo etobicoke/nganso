@@ -231,8 +231,11 @@ Details worth knowing:
   viewer, where it can be read, shared or saved.
 - **The resume PDF is a public version**, kept separate from job
   applications: titled "Principal AI Developer · Founder, Olochat AI Inc." to
-  match the card, and with **no phone or email**. Its contact line points at
-  `nganso.com/#contact` (consistent with §6.1). Source:
+  match the card. Its contact line has phone, email, nganso.com and LinkedIn
+  (one of the two exceptions to §6.1). Olochat AI Inc. is a single entry with
+  Oloproof, Olotalk and Oloform under it, and product statuses match the
+  homepage (Oloproof in public alpha, Oloform in development) — keep the two
+  in step. Source:
   `~/Documents/Resume/source/Gustave_Nganso_Resume_nganso-com_11-19-2026.html`,
   rendered with headless Chrome (`--print-to-pdf --no-pdf-header-footer
   --allow-file-access-from-files`). Every number in it is a public claim
