@@ -122,6 +122,17 @@ card headings (20–23px) → reading text (17px) → meta (14px) → small (13p
 Section labels are mono at `--fs-meta`, ink-coloured, weight 500. Literal
 SVG attribute colours use the same hex as the tokens, so update both together.
 
+Heading structure is load-bearing, even though it looks like small labels:
+`h1` headline → `h2.section-label` per section → `h3` per service,
+governance point and experience row. Each experience `h3.exp-head` holds
+both role and company. The product logos in Selected work have `alt=""`,
+with the name in a `.visually-hidden` span beside them. Keep all of this
+when restyling: screen readers navigate by it, and the Olotalk chat bubble's
+indexer splits the page into answerable sections at headings and drops short
+alt text. Before this, with `<p>` labels, it filed Experience, Writing and
+the contact form under "Risk Explorer · RBC", and the bubble couldn't say
+what was built for RBC.
+
 Conventions: mono for metadata/labels; hairline 1px dividers between sections;
 scroll-reveal via IntersectionObserver (respects `prefers-reduced-motion` and
 degrades gracefully with JS off); contact form posts to **Web3Forms** (public
