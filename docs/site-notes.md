@@ -26,6 +26,7 @@ ships, not a hype merchant. Every decision below protects that.
 | `/writing` | `src/pages/writing/index.astro` | Writing index. Globs `./*.md`, sorts by `date` frontmatter — new posts appear automatically. |
 | `/writing/demo-to-production` | `src/pages/writing/demo-to-production.md` | Post: "The gap between an AI demo and production." |
 | `/writing/rag-in-production` | `src/pages/writing/rag-in-production.md` | Post: "RAG in production: what the demos don't tell you." Contains the architecture diagram + two concept charts. |
+| `/card` | `src/pages/card.astro` | Conference business card. Unlinked and `noindex`. See §6c. |
 
 Blog posts render through `src/layouts/WritingLayout.astro`, which mirrors the
 homepage's design tokens so posts feel part of the same site.
@@ -192,6 +193,37 @@ loaded — the live site renders in Instrument Sans / IBM Plex Mono.
 Framing note: the site still sells **Gustave's consulting** — he is the product,
 Olochat is the company behind him. It was deliberately not rewritten into a
 company site (no "we", no product-marketing voice).
+
+---
+
+## 6c. Digital business card — `/card` (2026-11-19)
+
+A replacement for paper business cards at conferences. One page, two modes,
+picked before first paint:
+
+- **Presenter** (opened with no query string, e.g. from the phone's home
+  screen): a big QR code with a Website | LinkedIn switch; the Screen Wake
+  Lock API keeps the screen on while it shows.
+- **Visitor** (arrived by scanning, so the URL has `?utm_source=qr`): the QR
+  is hidden; they get **Save contact**, the site, LinkedIn and olochat.ca.
+
+Details worth knowing:
+- The website QR encodes `https://nganso.com/card/?utm_source=qr&utm_medium=card`,
+  so Google Analytics attributes scans to source `qr`. Clicks on Save contact
+  fire a `save_contact` event.
+- QR codes are generated at build time with the `qrcode` package as inline
+  SVG. No third-party QR service.
+- **Save contact** downloads `public/gustave-nganso.vcf` (vCard 3.0, CRLF line
+  endings): name, title, Olochat AI, site, LinkedIn, Toronto, and a note
+  pointing at the contact form. **No email or phone**, consistent with §6.1.
+- Offline backups for bad conference Wi-Fi: `public/assets/images/card/
+  qr-lockscreen.png` (iPhone lock-screen layout) and `qr-linkedin.png`, linked
+  from the bottom of the card. The home-screen icons live in the same folder.
+  **After changing a URL in `card.astro`, run `node scripts/card-images.mjs`**
+  to regenerate them; the page's own QR codes update on the next build.
+- iOS opens the vCard straight into "Add to Contacts" only if the server sends
+  `text/vcard` (or `text/x-vcard`). Check with `curl -sI
+  https://nganso.com/gustave-nganso.vcf` after each infrastructure change.
 
 ---
 

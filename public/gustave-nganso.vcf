@@ -1,0 +1,12 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Nganso;Gustave;;;
+FN:Gustave Nganso
+ORG:Olochat AI Inc.
+TITLE:Founder & Principal
+URL;TYPE=WORK:https://nganso.com/
+item1.URL:https://www.linkedin.com/in/gnganso-javascript-developer-engineer-architect/
+item1.X-ABLabel:LinkedIn
+ADR;TYPE=WORK:;;;Toronto;ON;;Canada
+NOTE:Generative AI consultant. I embed in your team and ship AI that runs in production. Get in touch: https://nganso.com/#contact
+END:VCARD

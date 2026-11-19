@@ -1,0 +1,22 @@
+{
+  "name": "Gustave Nganso",
+  "short_name": "Gustave",
+  "description": "Gustave Nganso's digital business card",
+  "start_url": "/card/",
+  "scope": "/card/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/assets/images/card/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/images/card/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
