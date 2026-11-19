@@ -222,6 +222,14 @@ Details worth knowing:
 - The website QR encodes `https://nganso.com/card/?utm_source=qr&utm_medium=card`,
   so Google Analytics attributes scans to source `qr`. Clicks on Save contact
   fire a `save_contact` event.
+- **The resume PDF is a public version**, kept separate from job
+  applications: titled "Principal AI Developer · Founder, Olochat AI Inc." to
+  match the card, and with **no phone or email**. Its contact line points at
+  `nganso.com/#contact` (consistent with §6.1). Source:
+  `~/Documents/Resume/source/Gustave_Nganso_Resume_nganso-com_11-19-2026.html`,
+  rendered with headless Chrome (`--print-to-pdf --no-pdf-header-footer
+  --allow-file-access-from-files`). Every number in it is a public claim
+  under the honesty rule (§3).
 - QR codes are generated at build time with the `qrcode` package as inline
   SVG. No third-party QR service.
 - **Save contact** downloads `public/gustave-nganso.vcf` (vCard 3.0, CRLF line
