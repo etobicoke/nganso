@@ -1,0 +1,22 @@
+---
+interface Props {
+  assistantId?: string;
+  apiOrigin?: string;
+}
+
+const {
+  assistantId = import.meta.env.PUBLIC_OLOTALK_ASSISTANT_ID,
+  apiOrigin = import.meta.env.PUBLIC_OLOTALK_API_ORIGIN,
+} = Astro.props;
+---
+
+{assistantId && (
+  <script
+    is:inline
+    src="https://cdn.jsdelivr.net/npm/@olotalk/assistant-loader@0/dist/loader.iife.js"
+    data-olotalk-assistant-id={assistantId}
+    data-olotalk-origin={apiOrigin || undefined}
+    data-olotalk-mode="bubble"
+    async
+  ></script>
+)}

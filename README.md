@@ -39,3 +39,15 @@ file name. Static assets go in `public/`.
 npm run dev      # local dev server
 npm run build    # static build → dist/
 ```
+
+## Olotalk widget
+
+The homepage, writing index, and posts share `src/components/OlotalkWidget.astro`,
+which loads Olotalk's floating chat bubble. Set `PUBLIC_OLOTALK_ASSISTANT_ID`
+in `.env` to the assistant ID from the Olotalk dashboard (see `.env.example`).
+Without an ID, no widget is loaded. `PUBLIC_OLOTALK_API_ORIGIN` is optional;
+leave it empty for Olotalk Cloud or set it for a self-hosted API.
+
+These public settings are embedded at build time, so rebuild after changing
+them. For production, use a live assistant with the site's domains allowed
+in its Olotalk settings.

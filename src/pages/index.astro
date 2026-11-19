@@ -4,7 +4,7 @@
 // NOT use Layout.astro (that layout carries the old site's video/coming-soon
 // styles). Google Analytics (gtag) is inlined below to preserve the site's
 // existing tracking (G-1KVEFPH9TZ). The old homepage now lives at /coming-soon.
-import OlotalkSearch from "../components/OlotalkSearch.astro";
+import OlotalkWidget from "../components/OlotalkWidget.astro";
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -1265,6 +1265,6 @@ import OlotalkSearch from "../components/OlotalkSearch.astro";
       els.forEach(function (el) { io.observe(el); });
     })();
   </script>
-<OlotalkSearch />
+<OlotalkWidget />
 </body>
 </html>

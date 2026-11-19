@@ -5,7 +5,7 @@
 const posts = (await Astro.glob('./*.md'))
   .sort((a, b) =>
     new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf());
-import OlotalkSearch from "../../components/OlotalkSearch.astro";
+import OlotalkWidget from "../../components/OlotalkWidget.astro";
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -151,6 +151,6 @@ import OlotalkSearch from "../../components/OlotalkSearch.astro";
     </section>
   </main>
 
-<OlotalkSearch />
+<OlotalkWidget />
 </body>
 </html>
