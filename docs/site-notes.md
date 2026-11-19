@@ -106,11 +106,20 @@ handling).
 |---|---|---|
 | `--bg` | `#ffffff` | page background |
 | `--ink` | `#101418` | primary text |
-| `--gray` | `#5b6470` | secondary text, metadata |
+| `--gray` | `#4a525c` | secondary text, metadata (darkened from `#5b6470` on 2026-11-19 for readability: 7.9:1 on white) |
 | `--hairline` | `#e6e8eb` | borders, dividers |
 | `--accent` | `#2547f4` | links, highlights, the one thing that matters |
 | `--sans` | Instrument Sans | display + body |
 | `--mono` | IBM Plex Mono | labels, dates, tags, captions |
+| `--fs-meta` | `14px` | mono labels, dates, links, nav, buttons |
+| `--fs-small` | `13px` | tags, form labels, figure captions |
+| `--fs-text` | `17px` | reading text in cards and lists (posts use the 18px body) |
+
+Type hierarchy on the homepage, largest to smallest: headline (84px max) →
+CTA (52px) → project names (34px) → section intros and lede (22–24px) →
+card headings (20–23px) → reading text (17px) → meta (14px) → small (13px).
+Section labels are mono at `--fs-meta`, ink-coloured, weight 500. Literal
+SVG attribute colours use the same hex as the tokens, so update both together.
 
 Conventions: mono for metadata/labels; hairline 1px dividers between sections;
 scroll-reveal via IntersectionObserver (respects `prefers-reduced-motion` and

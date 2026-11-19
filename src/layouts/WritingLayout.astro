@@ -41,12 +41,17 @@ import OlotalkWidget from "../components/OlotalkWidget.astro";
     :root {
       --bg: #ffffff;
       --ink: #101418;
-      --gray: #5b6470;
+      --gray: #4a525c;
       --hairline: #e6e8eb;
       --accent: #2547f4;
 
       --sans: "Instrument Sans", system-ui, -apple-system, sans-serif;
       --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+      /* Type scale: small sizes shared across the site */
+      --fs-meta: 14px;   /* mono labels, dates, links, nav, buttons */
+      --fs-small: 13px;  /* tags, form labels, captions */
+      --fs-text: 17px;   /* reading text in cards and lists */
 
       --measure: 720px;
       --pad: 24px;
@@ -108,7 +113,7 @@ import OlotalkWidget from "../components/OlotalkWidget.astro";
     }
     .nav-back {
       font-family: var(--mono);
-      font-size: 12.5px;
+      font-size: var(--fs-meta);
       letter-spacing: 0.02em;
       color: var(--gray);
       text-decoration: none;
@@ -124,7 +129,7 @@ import OlotalkWidget from "../components/OlotalkWidget.astro";
     }
     .post-meta {
       font-family: var(--mono);
-      font-size: 12.5px;
+      font-size: var(--fs-meta);
       letter-spacing: 0.06em;
       text-transform: uppercase;
       color: var(--gray);
@@ -139,7 +144,7 @@ import OlotalkWidget from "../components/OlotalkWidget.astro";
     }
     .post-standfirst {
       margin: 26px 0 0;
-      font-size: clamp(18px, 2.2vw, 21px);
+      font-size: clamp(20px, 2.5vw, 24px);
       line-height: 1.55;
       color: var(--gray);
       max-width: 40em;
@@ -160,7 +165,7 @@ import OlotalkWidget from "../components/OlotalkWidget.astro";
     }
     .prose h3 {
       margin: 1.8em 0 0.5em;
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 600;
       letter-spacing: -0.01em;
     }
@@ -201,7 +206,7 @@ import OlotalkWidget from "../components/OlotalkWidget.astro";
       border: 1px solid var(--hairline);
       border-radius: 8px;
       background: #fbfbfc;
-      font-size: 13.5px;
+      font-size: 14.5px;
       line-height: 1.6;
     }
     .prose pre code {
@@ -216,7 +221,7 @@ import OlotalkWidget from "../components/OlotalkWidget.astro";
       padding-bottom: 96px;
       border-top: 1px solid var(--hairline);
       font-family: var(--mono);
-      font-size: 12.5px;
+      font-size: var(--fs-meta);
       letter-spacing: 0.02em;
       color: var(--gray);
       display: flex;

@@ -64,7 +64,7 @@ Then you hand it to real users, with real documents, and it starts coming apart 
 <text x="180" y="603" text-anchor="middle" class="ta">Evals + monitoring</text>
 <text x="180" y="620" text-anchor="middle" class="s">score vs. a known-good set · watch for drift</text>
 </svg>
-<figcaption style="font-family: var(--mono); font-size: 12px; color: var(--gray); line-height: 1.55; margin-top: 16px; max-width: 430px; margin-left: auto; margin-right: auto;">A production RAG pipeline. Highlighted in blue — permission filtering, re-ranking, honest citations, and evals — are the parts a five-minute demo skips, and where most of the real work lives.</figcaption>
+<figcaption style="font-family: var(--mono); font-size: var(--fs-small); color: var(--gray); line-height: 1.55; margin-top: 16px; max-width: 430px; margin-left: auto; margin-right: auto;">A production RAG pipeline. Highlighted in blue — permission filtering, re-ranking, honest citations, and evals — are the parts a five-minute demo skips, and where most of the real work lives.</figcaption>
 </figure>
 
 ## The demo is a rigged sample
@@ -85,14 +85,14 @@ Plain vector similarity is also weaker than the demos let on. Embeddings are goo
 <svg viewBox="0 0 360 176" role="img" aria-label="Illustrative bar chart: retrieval quality is lowest for vector-only search, higher for hybrid vector-plus-keyword search, and highest for hybrid search followed by re-ranking." style="width: 100%; max-width: 400px; height: auto; display: block; margin: 0 auto;">
 <text x="30" y="14" font-family="'Instrument Sans',system-ui,sans-serif" font-size="13" font-weight="600" fill="#101418">Retrieval quality</text>
 <line x1="30" y1="30" x2="30" y2="168" stroke="#e6e8eb" stroke-width="1"/>
-<text x="34" y="42" font-family="'Instrument Sans',system-ui,sans-serif" font-size="12" fill="#5b6470">Vector only</text>
+<text x="34" y="42" font-family="'Instrument Sans',system-ui,sans-serif" font-size="12" fill="#4a525c">Vector only</text>
 <rect x="30" y="48" width="120" height="16" rx="2" fill="#d3d7dd"/>
-<text x="34" y="92" font-family="'Instrument Sans',system-ui,sans-serif" font-size="12" fill="#5b6470">Hybrid &#8212; vector + keyword</text>
+<text x="34" y="92" font-family="'Instrument Sans',system-ui,sans-serif" font-size="12" fill="#4a525c">Hybrid &#8212; vector + keyword</text>
 <rect x="30" y="98" width="190" height="16" rx="2" fill="#9aa1ab"/>
 <text x="34" y="142" font-family="'Instrument Sans',system-ui,sans-serif" font-size="12" font-weight="600" fill="#101418">Hybrid + re-rank</text>
 <rect x="30" y="148" width="258" height="16" rx="2" fill="#2547f4"/>
 </svg>
-<figcaption style="font-family: var(--mono); font-size: 12px; color: var(--gray); line-height: 1.55; margin-top: 14px; max-width: 400px; margin-left: auto; margin-right: auto;">Illustrative &mdash; relative shape, not measured numbers. Hybrid retrieval plus a re-ranker beats reaching for a fancier embedding model.</figcaption>
+<figcaption style="font-family: var(--mono); font-size: var(--fs-small); color: var(--gray); line-height: 1.55; margin-top: 14px; max-width: 400px; margin-left: auto; margin-right: auto;">Illustrative &mdash; relative shape, not measured numbers. Hybrid retrieval plus a re-ranker beats reaching for a fancier embedding model.</figcaption>
 </figure>
 
 ## The index goes stale immediately
@@ -125,11 +125,11 @@ Retrieve, re-rank, then generate, and every stage costs time and money. The demo
 <rect x="150" y="32" width="180" height="30" fill="#2547f4"/>
 <line x1="84" y1="32" x2="84" y2="62" stroke="#ffffff" stroke-width="1.5"/>
 <line x1="150" y1="32" x2="150" y2="62" stroke="#ffffff" stroke-width="1.5"/>
-<text x="57" y="80" text-anchor="middle" font-family="'IBM Plex Mono',ui-monospace,monospace" font-size="10.5" fill="#5b6470">retrieve</text>
-<text x="117" y="80" text-anchor="middle" font-family="'IBM Plex Mono',ui-monospace,monospace" font-size="10.5" fill="#5b6470">re-rank</text>
-<text x="240" y="80" text-anchor="middle" font-family="'IBM Plex Mono',ui-monospace,monospace" font-size="10.5" fill="#5b6470">generate (LLM)</text>
+<text x="57" y="80" text-anchor="middle" font-family="'IBM Plex Mono',ui-monospace,monospace" font-size="10.5" fill="#4a525c">retrieve</text>
+<text x="117" y="80" text-anchor="middle" font-family="'IBM Plex Mono',ui-monospace,monospace" font-size="10.5" fill="#4a525c">re-rank</text>
+<text x="240" y="80" text-anchor="middle" font-family="'IBM Plex Mono',ui-monospace,monospace" font-size="10.5" fill="#4a525c">generate (LLM)</text>
 </svg>
-<figcaption style="font-family: var(--mono); font-size: 12px; color: var(--gray); line-height: 1.55; margin-top: 14px; max-width: 400px; margin-left: auto; margin-right: auto;">Illustrative &mdash; the generation step usually dominates latency; the exact split varies by setup.</figcaption>
+<figcaption style="font-family: var(--mono); font-size: var(--fs-small); color: var(--gray); line-height: 1.55; margin-top: 14px; max-width: 400px; margin-left: auto; margin-right: auto;">Illustrative &mdash; the generation step usually dominates latency; the exact split varies by setup.</figcaption>
 </figure>
 
 These shape the product; they aren't something to optimize later. How much context can you afford per call? Would a smaller model with better retrieval be cheaper and still good enough? Can you cache the common questions? Decide while you're designing, not after finance reads the first bill.

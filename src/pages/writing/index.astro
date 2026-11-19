@@ -33,11 +33,16 @@ import OlotalkWidget from "../../components/OlotalkWidget.astro";
     :root {
       --bg: #ffffff;
       --ink: #101418;
-      --gray: #5b6470;
+      --gray: #4a525c;
       --hairline: #e6e8eb;
       --accent: #2547f4;
       --sans: "Instrument Sans", system-ui, -apple-system, sans-serif;
       --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+      /* Type scale: small sizes shared across the site */
+      --fs-meta: 14px;   /* mono labels, dates, links, nav, buttons */
+      --fs-small: 13px;  /* tags, form labels, captions */
+      --fs-text: 17px;   /* reading text in cards and lists */
       --measure: 720px;
       --pad: 24px;
     }
@@ -72,14 +77,14 @@ import OlotalkWidget from "../../components/OlotalkWidget.astro";
       text-decoration: none; white-space: nowrap;
     }
     .nav-back {
-      font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.02em;
+      font-family: var(--mono); font-size: var(--fs-meta); letter-spacing: 0.02em;
       color: var(--gray); text-decoration: none; transition: color 0.18s ease;
     }
     .nav-back:hover { color: var(--accent); }
 
     .head { padding-top: 72px; padding-bottom: 44px; }
     .label {
-      font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.08em;
+      font-family: var(--mono); font-size: var(--fs-meta); letter-spacing: 0.08em;
       text-transform: uppercase; color: var(--gray); margin: 0 0 20px;
     }
     .title {
@@ -88,7 +93,7 @@ import OlotalkWidget from "../../components/OlotalkWidget.astro";
     }
     .intro {
       margin: 24px 0 0; max-width: 40em; color: var(--gray);
-      font-size: clamp(18px, 2.2vw, 21px); line-height: 1.55;
+      font-size: clamp(20px, 2.5vw, 24px); line-height: 1.55;
     }
 
     .list { padding-bottom: 96px; }
@@ -100,17 +105,17 @@ import OlotalkWidget from "../../components/OlotalkWidget.astro";
     .entry:last-child { border-bottom: 1px solid var(--hairline); }
     .entry:hover .entry-title { color: var(--accent); }
     .entry-date {
-      font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.04em;
+      font-family: var(--mono); font-size: var(--fs-meta); letter-spacing: 0.04em;
       color: var(--gray); margin: 0 0 10px;
     }
     .entry-title {
       margin: 0; font-size: clamp(21px, 3vw, 26px); font-weight: 600;
       letter-spacing: -0.02em; line-height: 1.2; transition: color 0.18s ease;
     }
-    .entry-desc { margin: 10px 0 0; color: var(--gray); font-size: 16px; line-height: 1.55; }
+    .entry-desc { margin: 10px 0 0; color: var(--gray); font-size: var(--fs-text); line-height: 1.55; }
     .entry-more {
       display: inline-block; margin-top: 14px; font-family: var(--mono);
-      font-size: 12.5px; color: var(--accent);
+      font-size: var(--fs-meta); color: var(--accent);
     }
 
     .empty { color: var(--gray); padding: 30px 0 96px; }
