@@ -213,15 +213,17 @@ A replacement for paper business cards at conferences. One page, two modes,
 picked before first paint:
 
 - **Presenter** (opened with no query string, e.g. from the phone's home
-  screen): a big QR code with a Website | LinkedIn switch; the Screen Wake
-  Lock API keeps the screen on while it shows.
+  screen): a big QR code with a Website | LinkedIn | Resume switch; the
+  Screen Wake Lock API keeps the screen on while it shows.
 - **Visitor** (arrived by scanning, so the URL has `?utm_source=qr`): the QR
   is hidden; they get **Save contact**, the site, LinkedIn, the resume and
   olochat.ca.
 
 Details worth knowing:
 - The website QR encodes `https://nganso.com/card/?utm_source=qr&utm_medium=card`,
-  so Google Analytics attributes scans to source `qr`. Clicks on Save contact
+  so Google Analytics attributes scans to source `qr`. The resume QR
+  encodes the bare `https://nganso.com/resume.pdf`: a PDF runs no
+  Analytics, so its scans aren't counted. Clicks on Save contact
   fire a `save_contact` event; clicks on Download resume fire
   `download_resume`.
 - **Download resume** links the same `public/resume.pdf` as the homepage
@@ -241,8 +243,9 @@ Details worth knowing:
   endings): name, title, Olochat AI, site, LinkedIn, Toronto, and a note
   pointing at the contact form. **No email or phone**, consistent with §6.1.
 - Offline backups for bad conference Wi-Fi: `public/assets/images/card/
-  qr-lockscreen.png` (iPhone lock-screen layout) and `qr-linkedin.png`, linked
-  from the bottom of the card. The home-screen icons live in the same folder.
+  qr-lockscreen.png` (iPhone lock-screen layout), `qr-linkedin.png` and
+  `qr-resume.png`, linked from the bottom of the card. The home-screen icons
+  live in the same folder.
   **After changing a URL in `card.astro`, run `node scripts/card-images.mjs`**
   to regenerate them; the page's own QR codes update on the next build.
 - iOS opens the vCard straight into "Add to Contacts" only if the server sends

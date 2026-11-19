@@ -3,8 +3,8 @@
 //
 // One page, two modes, chosen before first paint by the inline script below:
 //   • Presenter (Gustave opens it from his phone's home screen, no query
-//     string): a big QR code with a Website | LinkedIn switch, and the screen
-//     is kept awake while it's showing.
+//     string): a big QR code with a Website | LinkedIn | Resume switch, and
+//     the screen is kept awake while it's showing.
 //   • Visitor (someone scanned the website QR, which adds ?utm_source=qr):
 //     the QR is hidden and they get Save contact, the site, LinkedIn and
 //     the resume.
@@ -20,6 +20,7 @@ import QRCode from "qrcode";
 const SITE = "https://nganso.com";
 const CARD_URL = `${SITE}/card/?utm_source=qr&utm_medium=card`;
 const LINKEDIN = "https://www.linkedin.com/in/gnganso/";
+const RESUME = `${SITE}/resume.pdf`;
 
 const qrOptions = {
   type: "svg",
@@ -29,6 +30,7 @@ const qrOptions = {
 };
 const qrSite = await QRCode.toString(CARD_URL, qrOptions);
 const qrLinkedIn = await QRCode.toString(LINKEDIN, qrOptions);
+const qrResume = await QRCode.toString(RESUME, qrOptions);
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -171,6 +173,8 @@ const qrLinkedIn = await QRCode.toString(LINKEDIN, qrOptions);
       cursor: pointer;
     }
     .switch button[aria-selected="true"] { background: var(--ink); color: #fff; }
+    /* Three tabs overflow a 320px screen at full padding */
+    @media (max-width: 359px) { .switch button { padding: 9px 12px; } }
 
     .qr {
       border: 1px solid var(--hairline);
@@ -232,11 +236,14 @@ const qrLinkedIn = await QRCode.toString(LINKEDIN, qrOptions);
       <div class="switch" role="tablist" aria-label="Which QR code">
         <button type="button" role="tab" aria-selected="true" data-qr="site">Website</button>
         <button type="button" role="tab" aria-selected="false" data-qr="linkedin">LinkedIn</button>
+        <button type="button" role="tab" aria-selected="false" data-qr="resume">Resume</button>
       </div>
       <div class="qr" data-panel="site" role="img" aria-label="QR code that opens Gustave Nganso's card on nganso.com" set:html={qrSite}></div>
       <div class="qr" data-panel="linkedin" role="img" aria-label="QR code that opens Gustave Nganso's LinkedIn profile" set:html={qrLinkedIn} hidden></div>
+      <div class="qr" data-panel="resume" role="img" aria-label="QR code that opens Gustave Nganso's resume (PDF)" set:html={qrResume} hidden></div>
       <p class="qr-caption mono" data-caption="site">Scan to save my contact</p>
       <p class="qr-caption mono" data-caption="linkedin" hidden>Scan to connect on LinkedIn</p>
+      <p class="qr-caption mono" data-caption="resume" hidden>Scan to open my resume</p>
     </section>
 
     <nav class="actions" aria-label="Contact">
@@ -250,7 +257,8 @@ const qrLinkedIn = await QRCode.toString(LINKEDIN, qrOptions);
     <p class="offline mono">
       No signal? Save these to your photos:
       <a href="/assets/images/card/qr-lockscreen.png">website QR</a> ·
-      <a href="/assets/images/card/qr-linkedin.png">LinkedIn QR</a>
+      <a href="/assets/images/card/qr-linkedin.png">LinkedIn QR</a> ·
+      <a href="/assets/images/card/qr-resume.png">resume QR</a>
     </p>
   </main>
 

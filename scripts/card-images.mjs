@@ -2,7 +2,7 @@
 //
 //   node scripts/card-images.mjs
 //
-// Run it after changing CARD_URL or LINKEDIN in src/pages/card.astro — the page
+// Run it after changing CARD_URL, LINKEDIN or RESUME in src/pages/card.astro — the page
 // regenerates its own QR codes at build time, but these PNGs are committed.
 // URLs are read from card.astro, so the images can't drift from the page.
 //
@@ -24,11 +24,13 @@ const src = readFileSync(join(root, "src/pages/card.astro"), "utf8");
 const SITE = src.match(/const SITE = "([^"]+)"/)[1];
 const CARD_URL = SITE + src.match(/const CARD_URL = `\$\{SITE\}([^`]+)`/)[1];
 const LINKEDIN = src.match(/const LINKEDIN = "([^"]+)"/)[1];
+const RESUME = SITE + src.match(/const RESUME = `\$\{SITE\}([^`]+)`/)[1];
 
 // Same options as the page, so the PNGs and the on-screen codes match.
 const opts = { type: "svg", margin: 4, errorCorrectionLevel: "M", color: { dark: "#101418", light: "#ffffff" } };
 const qrSite = await QRCode.toString(CARD_URL, opts);
 const qrLinkedIn = await QRCode.toString(LINKEDIN, opts);
+const qrResume = await QRCode.toString(RESUME, opts);
 
 const page = (w, h, body, bodyStyle = "") => `<!doctype html><html><head><meta charset="utf-8">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;600;700&display=swap" rel="stylesheet">
@@ -60,6 +62,12 @@ const renders = [
 <div class="qr" style="width:760px;margin-top:28px">${qrLinkedIn}</div>
 <div class="mono" style="font-size:34px;margin-top:10px">Scan to connect on LinkedIn</div>`, "justify-content:center"),
   },
+  {
+    file: "qr-resume.png", w: 1080, h: 1080,
+    html: page(1080, 1080, `<div style="font-size:64px;font-weight:700;letter-spacing:-0.03em;line-height:1">Gustave Nganso</div>
+<div class="qr" style="width:760px;margin-top:28px">${qrResume}</div>
+<div class="mono" style="font-size:34px;margin-top:10px">Scan to open my resume</div>`, "justify-content:center"),
+  },
 ];
 
 const tmp = mkdtempSync(join(tmpdir(), "card-images-"));
@@ -79,3 +87,4 @@ for (const [file, size] of [["icon-192.png", 192], ["apple-touch-icon.png", 180]
 }
 console.log("card QR ->", CARD_URL);
 console.log("LinkedIn QR ->", LINKEDIN);
+console.log("Resume QR ->", RESUME);
