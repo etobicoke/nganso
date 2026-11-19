@@ -377,6 +377,14 @@ import OlotalkWidget from "../components/OlotalkWidget.astro";
       transition: color 0.18s ease;
     }
     details[open] > .work-summary .work-name { color: var(--accent); }
+    /* Product marks (own products only — never client logos, see site-notes §3) */
+    .work-logo {
+      display: inline-block; /* overrides the global img { display: block } reset */
+      height: 0.8em;
+      width: auto;
+      vertical-align: -0.1em;
+      margin-right: 0.38em;
+    }
     .work-meta {
       font-family: var(--mono);
       font-size: 12.5px;
@@ -655,6 +663,8 @@ import OlotalkWidget from "../components/OlotalkWidget.astro";
       html.js .gov-item:nth-child(6)                { transition-delay: 0.32s; }
       html.js .work-item:nth-of-type(2)             { transition-delay: 0.10s; }
       html.js .work-item:nth-of-type(3)             { transition-delay: 0.20s; }
+      html.js .work-item:nth-of-type(4)             { transition-delay: 0.30s; }
+      html.js .work-item:nth-of-type(5)             { transition-delay: 0.40s; }
       html.js #writing .post:nth-of-type(2)         { transition-delay: 0.10s; }
     }
 
@@ -914,7 +924,7 @@ import OlotalkWidget from "../components/OlotalkWidget.astro";
         <details class="work-item" open>
           <summary class="work-summary">
             <span class="work-name">
-              Olotalk
+              <img class="work-logo" src="/assets/images/logos/olotalk.svg" alt="" width="27" height="24" loading="lazy" decoding="async" />Olotalk
               <span class="work-toggle mono" aria-hidden="true"><span class="plus">+</span><span class="minus">–</span></span>
             </span>
             <span class="work-meta">2025–Now · Olochat AI · RAG platform</span>
@@ -976,6 +986,74 @@ import OlotalkWidget from "../components/OlotalkWidget.astro";
               <a class="case-link" href="https://olotalk.com">Visit olotalk.com</a>
               <a class="case-link" href="https://wordpress.org/plugins/olotalk-grounded-ai-assistant/">WordPress plugin</a>
               <a class="case-link" href="https://olochat.ca">Olochat AI Inc. · olochat.ca</a>
+            </div>
+          </div>
+        </details>
+
+        <!-- Oloproof / Olochat AI — AI evaluation -->
+        <details class="work-item">
+          <summary class="work-summary">
+            <span class="work-name">
+              <img class="work-logo" src="/assets/images/logos/oloproof.svg" alt="" width="40" height="24" loading="lazy" decoding="async" />Oloproof
+              <span class="work-toggle mono" aria-hidden="true"><span class="plus">+</span><span class="minus">–</span></span>
+            </span>
+            <span class="work-meta">2026–Now · Olochat AI · AI evaluation</span>
+          </summary>
+          <div class="work-body">
+            <ul class="tags">
+              <li>LLM evals</li>
+              <li>LLM-as-judge</li>
+              <li>Statistics</li>
+              <li>Python</li>
+              <li>Next.js</li>
+              <li>PostgreSQL</li>
+            </ul>
+            <p>
+              <strong>Built a release gate that says whether a change to an AI
+              system actually made it better.</strong> Each release gets a
+              pass, a fail, or &ldquo;not enough evidence yet&rdquo; &mdash;
+              decided on confidence intervals, not averages. AI judges are
+              checked against human labels before they&rsquo;re allowed to
+              gate anything, and every statistical method has a written spec
+              and simulation tests of its error rate. In public alpha: a CLI
+              on PyPI and a hosted workbench.
+            </p>
+            <div class="case-links">
+              <a class="case-link" href="https://oloproof.com">Visit oloproof.com</a>
+              <a class="case-link" href="https://pypi.org/project/oloproof/">oloproof on PyPI</a>
+            </div>
+          </div>
+        </details>
+
+        <!-- Oloform / Olochat AI — workflow app generator (platform not hosted yet) -->
+        <details class="work-item">
+          <summary class="work-summary">
+            <span class="work-name">
+              <img class="work-logo" src="/assets/images/logos/oloform.svg" alt="" width="24" height="24" loading="lazy" decoding="async" />Oloform
+              <span class="work-toggle mono" aria-hidden="true"><span class="plus">+</span><span class="minus">–</span></span>
+            </span>
+            <span class="work-meta">2026 · Olochat AI · In development</span>
+          </summary>
+          <div class="work-body">
+            <ul class="tags">
+              <li>Rust</li>
+              <li>Code generation</li>
+              <li>Sandboxing</li>
+              <li>PostgreSQL</li>
+              <li>React</li>
+              <li>Open-weight LLMs</li>
+            </ul>
+            <p>
+              <strong>Turns a plain-language description of a business
+              workflow into a tested app the customer owns.</strong> An LLM
+              drafts the spec for a request, approval, or review flow; a
+              deterministic Rust compiler generates the app, byte-identical on
+              every run. Model output is treated as untrusted: every check runs
+              in a locked-down sandbox, and nothing ships until a person
+              approves that exact build.
+            </p>
+            <div class="case-links">
+              <a class="case-link" href="https://oloform.com">Join the waitlist at oloform.com</a>
             </div>
           </div>
         </details>
@@ -1050,9 +1128,11 @@ import OlotalkWidget from "../components/OlotalkWidget.astro";
           <p class="exp-role">Founder &amp; Principal</p>
           <p class="exp-company mono"><a href="https://olochat.ca">Olochat AI Inc. · olochat.ca</a></p>
           <p class="exp-detail">
-            AI training for teams, and AI products of our own &mdash; including
-            Olotalk, a production RAG chat and support platform I architected
-            and shipped end to end.
+            AI training for teams, and AI products of our own, each one I
+            architected and built end to end: Olotalk, a production RAG
+            assistant; Oloproof, statistical evaluation for AI releases, in
+            public alpha; and Oloform, workflow-app generation, in
+            development.
           </p>
         </div>
       </div>
