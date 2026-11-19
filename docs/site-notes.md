@@ -184,7 +184,10 @@ loaded — the live site renders in Instrument Sans / IBM Plex Mono.
    error fallback, `WritingLayout.astro` footer, and the CTA at the end of both
    blog posts). Every one of those now points at the **`#contact` form** — the
    Web3Forms form is the single contact path. If an address is ever added back,
-   add it in one place, not six. The homepage hero's "Get in touch" link uses
+   add it in one place, not six.
+   *Exceptions (2026-11-19):* the downloadable resume (`public/resume.pdf`)
+   and the card's vCard (`public/gustave-nganso.vcf`) carry the email and
+   phone number. The web pages themselves still don't. The homepage hero's "Get in touch" link uses
    `.hero-links a.is-anchor`, which swaps the `↗` prefix for `↓` since it's a
    same-page jump, and the closing CTA line is now a plain `<span class="accent">`
    (the `.cta-email` rule was deleted with its last user).
@@ -244,7 +247,8 @@ Details worth knowing:
   SVG. No third-party QR service.
 - **Save contact** downloads `public/gustave-nganso.vcf` (vCard 3.0, CRLF line
   endings): name, title, Olochat AI, site, LinkedIn, Toronto, and a note
-  pointing at the contact form. **No email or phone**, consistent with §6.1.
+  pointing at the contact form, plus work phone and email (an exception to
+  §6.1).
 - Offline backups for bad conference Wi-Fi: `public/assets/images/card/
   qr-lockscreen.png` (iPhone lock-screen layout), `qr-linkedin.png` and
   `qr-resume.png`, linked from the bottom of the card. The home-screen icons
