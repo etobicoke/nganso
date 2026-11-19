@@ -108,6 +108,21 @@ import OlotalkWidget from "../components/OlotalkWidget.astro";
 
     .accent { color: var(--accent); }
 
+    /* Read by screen readers and crawlers, never drawn (e.g. a product name
+       whose logo is shown instead). */
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      border: 0;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
     /* ---------- Focus visibility ---------- */
     a:focus-visible,
     summary:focus-visible,
@@ -386,7 +401,9 @@ import OlotalkWidget from "../components/OlotalkWidget.astro";
     }
     details[open] > .work-summary .work-name { color: var(--accent); }
     /* Product logos stand in for the text name (own products only — never
-       client logos, see site-notes §3). Heights are tuned per logo so each
+       client logos, see site-notes §3). The logo has alt="" and the name sits
+       beside it in a .visually-hidden span: indexers that skip short alt text
+       still get the name, and screen readers hear it once. Heights are tuned per logo so each
        one's lettering matches the text names; Oloproof sits lower because
        its descender takes up the bottom of the image. */
     .work-wordmark {
@@ -471,6 +488,14 @@ import OlotalkWidget from "../components/OlotalkWidget.astro";
       letter-spacing: -0.01em;
     }
     .exp-company { color: var(--gray); }
+    /* Role and company share one heading, so screen readers and crawlers
+       (including the Olotalk assistant's indexer) read "Senior Full-Stack
+       Developer, RBC" as a unit. Renders exactly like the two paragraphs it
+       replaced: the company keeps the 1em paragraph margins it used to get. */
+    .exp-head { margin: 0; font-size: inherit; font-weight: inherit; }
+    .exp-head .exp-role,
+    .exp-head .exp-company { display: block; }
+    .exp-head .exp-company { margin: 1em 0; }
     .exp-detail {
       margin: 8px 0 0;
       color: var(--gray);
@@ -801,7 +826,7 @@ import OlotalkWidget from "../components/OlotalkWidget.astro";
 
     <!-- ================= SERVICES ================= -->
     <section class="section wrap" id="services" aria-labelledby="services-label">
-      <p class="section-label" id="services-label">How I work with companies</p>
+      <h2 class="section-label" id="services-label">How I work with companies</h2>
 
       <p class="services-intro">
         I work <strong>embedded in your team</strong> &mdash; in your codebase,
@@ -868,7 +893,7 @@ import OlotalkWidget from "../components/OlotalkWidget.astro";
 
     <!-- ================= SECURITY & GOVERNANCE ================= -->
     <section class="section wrap" id="governance" aria-labelledby="gov-label">
-      <p class="section-label" id="gov-label">Security &amp; governance</p>
+      <h2 class="section-label" id="gov-label">Security &amp; governance</h2>
 
       <p class="gov-intro">
         Enterprise AI lives or dies on the boring parts: where the data sits,
@@ -936,14 +961,14 @@ import OlotalkWidget from "../components/OlotalkWidget.astro";
 
     <!-- ================= SELECTED WORK ================= -->
     <section class="section wrap" id="work" aria-labelledby="work-label">
-      <p class="section-label" id="work-label">Selected work</p>
+      <h2 class="section-label" id="work-label">Selected work</h2>
 
       <div class="work-list">
         <!-- Olotalk / Olochat AI — open by default -->
         <details class="work-item" open>
           <summary class="work-summary">
             <span class="work-name">
-              <img class="work-wordmark is-olotalk" src="/assets/images/logos/olotalk-logo.svg" alt="Olotalk" width="155" height="35" loading="lazy" decoding="async" />
+              <span class="visually-hidden">Olotalk</span><img class="work-wordmark is-olotalk" src="/assets/images/logos/olotalk-logo.svg" alt="" width="155" height="35" loading="lazy" decoding="async" />
               <span class="work-toggle mono" aria-hidden="true"><span class="plus">+</span><span class="minus">–</span></span>
             </span>
             <span class="work-meta">2025–Now · Olochat AI · RAG platform</span>
@@ -1013,7 +1038,7 @@ import OlotalkWidget from "../components/OlotalkWidget.astro";
         <details class="work-item">
           <summary class="work-summary">
             <span class="work-name">
-              <img class="work-wordmark is-oloproof" src="/assets/images/logos/oloproof-logo.svg" alt="Oloproof" width="135" height="32" loading="lazy" decoding="async" />
+              <span class="visually-hidden">Oloproof</span><img class="work-wordmark is-oloproof" src="/assets/images/logos/oloproof-logo.svg" alt="" width="135" height="32" loading="lazy" decoding="async" />
               <span class="work-toggle mono" aria-hidden="true"><span class="plus">+</span><span class="minus">–</span></span>
             </span>
             <span class="work-meta">2026–Now · Olochat AI · AI evaluation</span>
@@ -1048,7 +1073,7 @@ import OlotalkWidget from "../components/OlotalkWidget.astro";
         <details class="work-item">
           <summary class="work-summary">
             <span class="work-name">
-              <img class="work-wordmark is-oloform" src="/assets/images/logos/oloform-logo.svg" alt="Oloform" width="171" height="30" loading="lazy" decoding="async" />
+              <span class="visually-hidden">Oloform</span><img class="work-wordmark is-oloform" src="/assets/images/logos/oloform-logo.svg" alt="" width="171" height="30" loading="lazy" decoding="async" />
               <span class="work-toggle mono" aria-hidden="true"><span class="plus">+</span><span class="minus">–</span></span>
             </span>
             <span class="work-meta">2026 · Olochat AI · In development</span>
@@ -1133,7 +1158,7 @@ import OlotalkWidget from "../components/OlotalkWidget.astro";
 
     <!-- ================= EXPERIENCE ================= -->
     <section class="section wrap" id="experience" aria-labelledby="exp-label">
-      <p class="section-label" id="exp-label">Experience</p>
+      <h2 class="section-label" id="exp-label">Experience</h2>
 
       <p class="exp-intro">
         Nearly 20 years building production systems, from telecom and banking
@@ -1144,8 +1169,10 @@ import OlotalkWidget from "../components/OlotalkWidget.astro";
       <div class="exp-row">
         <div class="exp-date">2025 – Now</div>
         <div>
-          <p class="exp-role">Founder &amp; Principal</p>
-          <p class="exp-company mono"><a href="https://olochat.ca">Olochat AI Inc. · olochat.ca</a></p>
+          <h3 class="exp-head">
+            <span class="exp-role">Founder &amp; Principal</span>
+            <span class="exp-company mono"><a href="https://olochat.ca">Olochat AI Inc. · olochat.ca</a></span>
+          </h3>
           <p class="exp-detail">
             AI training for teams, and AI products of our own, each one I
             architected and built end to end: Olotalk, a production RAG
@@ -1159,8 +1186,10 @@ import OlotalkWidget from "../components/OlotalkWidget.astro";
       <div class="exp-row">
         <div class="exp-date">2009 – Now</div>
         <div>
-          <p class="exp-role">Principal Developer &amp; AI Consultant</p>
-          <p class="exp-company mono">Independent practice · Toronto</p>
+          <h3 class="exp-head">
+            <span class="exp-role">Principal Developer &amp; AI Consultant</span>
+            <span class="exp-company mono">Independent practice · Toronto</span>
+          </h3>
           <p class="exp-detail">
             Full-stack and AI/LLM delivery for fintech, media, and
             public-sector clients, end to end.
@@ -1171,8 +1200,10 @@ import OlotalkWidget from "../components/OlotalkWidget.astro";
       <div class="exp-row">
         <div class="exp-date">2024 – 2025</div>
         <div>
-          <p class="exp-role">Senior Full-Stack Developer</p>
-          <p class="exp-company mono">BMO · Cloud Center of Excellence</p>
+          <h3 class="exp-head">
+            <span class="exp-role">Senior Full-Stack Developer</span>
+            <span class="exp-company mono">BMO · Cloud Center of Excellence</span>
+          </h3>
           <p class="exp-detail">
             Built cloud-migration tooling on Next.js, Node.js, and AWS Lambda.
           </p>
@@ -1182,8 +1213,10 @@ import OlotalkWidget from "../components/OlotalkWidget.astro";
       <div class="exp-row">
         <div class="exp-date">2022 – 2024</div>
         <div>
-          <p class="exp-role">Senior Full-Stack Developer</p>
-          <p class="exp-company mono">RBC · Enterprise Risk Management</p>
+          <h3 class="exp-head">
+            <span class="exp-role">Senior Full-Stack Developer</span>
+            <span class="exp-company mono">RBC · Enterprise Risk Management</span>
+          </h3>
           <p class="exp-detail">
             Built an interactive risk-visualization tool with graph algorithms
             and LLM-assisted insights.
@@ -1194,8 +1227,10 @@ import OlotalkWidget from "../components/OlotalkWidget.astro";
       <div class="exp-row">
         <div class="exp-date">2018 – 2020</div>
         <div>
-          <p class="exp-role">Senior Full-Stack Developer</p>
-          <p class="exp-company mono">MobileLIVE</p>
+          <h3 class="exp-head">
+            <span class="exp-role">Senior Full-Stack Developer</span>
+            <span class="exp-company mono">MobileLIVE</span>
+          </h3>
           <p class="exp-detail">
             Led fido.ca&rsquo;s AngularJS to Angular 7 migration; built
             CIBC/Simplii money-transfer features.
@@ -1206,8 +1241,10 @@ import OlotalkWidget from "../components/OlotalkWidget.astro";
       <div class="exp-row">
         <div class="exp-date">2018</div>
         <div>
-          <p class="exp-role">Senior Frontend Developer</p>
-          <p class="exp-company mono">Bell Media</p>
+          <h3 class="exp-head">
+            <span class="exp-role">Senior Frontend Developer</span>
+            <span class="exp-company mono">Bell Media</span>
+          </h3>
           <p class="exp-detail">
             Built features for the Vidi video player used across 25 Bell brands.
           </p>
@@ -1220,7 +1257,7 @@ import OlotalkWidget from "../components/OlotalkWidget.astro";
 
     <!-- ================= WRITING ================= -->
     <section class="section wrap" id="writing" aria-labelledby="writing-label">
-      <p class="section-label" id="writing-label">Writing</p>
+      <h2 class="section-label" id="writing-label">Writing</h2>
 
       <!-- Posts — live at /writing/<slug>; the section index is /writing -->
       <a class="post" href="/writing/demo-to-production">
